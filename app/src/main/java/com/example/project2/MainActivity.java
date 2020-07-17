@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        viewPager = findViewById(R.id.view_pager);
-        tabLayout = findViewById(R.id.tab_layout);
+        viewPager = findViewById(R.id.view_pager); //탭별 화면 보이는 view pager
+        tabLayout = findViewById(R.id.tab_layout); //탭바
 
         fragment1 = new Fragment1();
         fragment2 = new Fragment2();
@@ -57,12 +57,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu1);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_menu2);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_menu3);
-
-        //BadgeDrawable badgeDrawable = tabLayout.getTabAt(0).getOrCreateBadge();
-        //badgeDrawable.setVisible(true);
-        //badgeDrawable.setNumber(12);]
-
-
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
