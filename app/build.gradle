@@ -4,6 +4,10 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.0"
 
+    repositories {
+        mavenCentral()
+    }
+
     defaultConfig {
         applicationId "com.example.project2"
         minSdkVersion 23
@@ -47,6 +51,12 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.0'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
     implementation group: 'io.socket', name: 'socket.io-client', version: '1.0.0'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+
+    //Facebook Login
+    implementation 'com.facebook.android:facebook-android-sdk:4.+'
 
     /*implementation ('io.socket:socket.io-client:1.0.0'){
         exclude group: 'org.json', module: 'json'

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="150dp"
+        android:background="#000"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:gravity="center"
+            android:textSize="60dp"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:text="Title"
+            android:fontFamily="@font/gillsans"
+            />
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:textSize="15dp"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:text="Username"
+
+            android:fontFamily="@font/gillsans"
+            />
+
+        <EditText
+            android:id="@+id/userid"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint=""
+            android:backgroundTint="#FFF"
+            android:textColor="#FFF"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+             />
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:text="Password"
+            android:fontFamily="@font/gillsans"
+            />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:backgroundTint="#FFF"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/userid"
+            android:textColor="#FFF"
+            />
+
+        <TextView
+            android:id="@+id/loginButton"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:text="Login"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="#000"
+            android:background="#fff"
+            android:fontFamily="@font/gillsansb"
+            />
+        <com.facebook.login.widget.LoginButton
+            android:layout_below="@+id/label"
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"
+                android:textColor="#FFF"
+                android:text="You don't have a account? "
+
+                />
+
+            <TextView
+                android:id="@+id/signup"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"
+                android:textColor="#FFF"
+                android:textStyle="bold"
+                android:text="SIGN UP "
+                android:clickable="true"
+                />
+            <ProgressBar
+                android:id="@+id/my_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="150dp"
+                android:visibility="invisible"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
