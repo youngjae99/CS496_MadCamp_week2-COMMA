@@ -8,12 +8,10 @@
     android:gravity="center"
     tools:context=".MainActivity">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginBottom="150dp"
         android:background="#000"
         android:gravity="center_horizontal">
 
@@ -125,15 +123,17 @@
                 android:text="SIGN UP "
                 android:clickable="true"
                 />
-            <ProgressBar
-                android:id="@+id/my_progress_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="150dp"
-                android:visibility="invisible"
-                />
+
         </LinearLayout>
+        <ImageView
+            android:id="@+id/circleImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="2dp"
+            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
 
 </LinearLayout>
