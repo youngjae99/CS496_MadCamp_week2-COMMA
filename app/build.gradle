@@ -56,7 +56,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.7.0'
 
     //Facebook Login
-    implementation 'com.facebook.android:facebook-android-sdk:4.+'
+    implementation 'com.facebook.android:facebook-android-sdk:5.+'
 
     /*implementation ('io.socket:socket.io-client:1.0.0'){
         exclude group: 'org.json', module: 'json'
