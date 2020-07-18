@@ -1,6 +1,10 @@
 package com.example.project2;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.io.BufferedOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    private Button btn_logout;
+    private TextView txt_username;
 
     private Fragment1 fragment1;
     private Fragment2 fragment2;
@@ -41,6 +48,21 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.view_pager); //탭별 화면 보이는 view pager
         tabLayout = findViewById(R.id.tab_layout); //탭바
+
+        txt_username = (TextView)findViewById(R.id.username);
+        txt_username.setText(getIntent().getStringExtra("UserName"));
+
+        btn_logout = (Button) findViewById(R.id.logout);
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+
+                finish();
+            }
+        });
 
         fragment1 = new Fragment1();
         fragment2 = new Fragment2();

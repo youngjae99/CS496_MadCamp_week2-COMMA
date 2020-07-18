@@ -9,12 +9,13 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="match_parent"
             android:background="@android:color/white">
-        <!--
+            <!--
             <ImageView
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
@@ -23,16 +24,37 @@
                 android:tint="@android:color/black"
                 />
 -->
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="30dp"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:text="Title"
-                android:fontFamily="@font/gillsans"
-                />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/logout"
+                    android:text="logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gillsans"
+                    android:gravity="center"
+                    android:text="Title"
+                    android:textColor="#000"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="username" />
+
+            </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -40,7 +62,8 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="530dp"
+
         app:layout_anchor="@+id/view_pager"
         app:layout_anchorGravity="center"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />

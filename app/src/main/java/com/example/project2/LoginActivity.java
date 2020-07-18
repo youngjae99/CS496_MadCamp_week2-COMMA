@@ -257,21 +257,25 @@ public class LoginActivity extends AppCompatActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String response) throws Exception {
-                        Toast.makeText(LoginActivity.this, response, Toast.LENGTH_SHORT).show();
-                        if (response.equals("\"Login success\"")) {
-                            LoginSuccess(email, password);
+                        String[] res_list = response.split("/");
+                        String[] res_list2 = res_list[1].split("\"");
+                        if (res_list[0].equals("\"Login success")) {
+                            LoginSuccess(email, res_list2[0]);
                         }
+                        Toast.makeText(LoginActivity.this, "Welcome "+res_list2[0] +"!!", Toast.LENGTH_LONG).show();
                     }
                 }));
 
     }
 
-    private void LoginSuccess(String email, String password) {
+    private void LoginSuccess(String email, String name) {
         Log.e("################", "Accesss!!!!!!!!!!!!!");
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra("email", email);
-        intent.putExtra("password", password);
-        startActivity(intent);
+        intent.putExtra("UserEmail", email);
+        intent.putExtra("UserName", name);
+        startActivity(intent);  // main 화면으로 이동
+
+        finish(); // login 화면은 종료..
     }
 
 
