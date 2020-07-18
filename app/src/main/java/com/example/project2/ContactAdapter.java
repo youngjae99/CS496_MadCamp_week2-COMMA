@@ -57,7 +57,7 @@ public class ContactAdapter extends ArrayAdapter<Person> {
             photo.setClipToOutline(true);
         }*/
         name.setText(p.getName());
-        number.setText("전화번호: "+ p.getNumber());
+        number.setText(p.getNumber());
 
         return v;
     }

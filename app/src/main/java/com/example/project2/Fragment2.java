@@ -26,7 +26,11 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
     GridView gridView;
     GridLayoutManager gridLayoutManager;
     private GalleryManager mGalleryManager;
+    ImageAdapter dataAdapter;
+
     public ArrayList<imgFormat> localPhotoList;
+    static ArrayList<ImageUrl> imageUrlList = new ArrayList<>();
+
 
     public Fragment2() {
         // Required empty public constructor
@@ -55,6 +59,16 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment2, container, false);
+
+        imageView = (ImageView) v.findViewById(R.id.imageView);
+        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView2);
+        gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 3);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        mGalleryManager = new GalleryManager(getActivity().getApplicationContext());
+        localPhotoList = mGalleryManager.getAllPhotoPathList();
+        dataAdapter = new ImageAdapter(getActivity().getApplicationContext(), imageUrlList, localPhotoList, this, this);
+        recyclerView.setAdapter(dataAdapter);
 /*
         imageView = (ImageView) v.findViewById(R.id.imageView);
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView2);
