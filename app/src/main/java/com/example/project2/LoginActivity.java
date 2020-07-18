@@ -1,12 +1,8 @@
 package com.example.project2;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -28,22 +24,45 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
-import com.facebook.internal.Utility;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.example.project2.Retrofit.IMyService;
+import com.example.project2.Retrofit.RetrofitClient;
+import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
+import com.rengwuxian.materialedittext.MaterialEditText;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
     String TAG = "LoginActivity";
     String uid="", pw="";
-    EditText usernameET,passwordET;
+    EditText user_emailET,passwordET;
     ImageView circleImageView;
 
     private CallbackManager callbackManager;
@@ -51,6 +70,16 @@ public class LoginActivity extends AppCompatActivity {
     ArrayList<String> data;
     ArrayAdapter<String> arrayAdapter;
 
+    TextView signup;
+
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
+    IMyService iMyService;
+
+    @Override
+    protected void onStop() {
+        compositeDisposable.clear();
+        super.onStop();
+    }
 
     //== user info ========
     static String name="", email="", profileImg="";
@@ -61,44 +90,89 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Init Service
+        Retrofit retrofitClient = RetrofitClient.getInstance();
+        iMyService = retrofitClient.create(IMyService.class);
+
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_login);
 
         data=new ArrayList<String>();
-        usernameET=(EditText) findViewById(R.id.userid);
+        user_emailET=(EditText) findViewById(R.id.user_email);
         passwordET=(EditText) findViewById(R.id.password);
         circleImageView = findViewById(R.id.circleImageView);
 
         callbackManager = CallbackManager.Factory.create();
 
         if(getIntent().getExtras() != null){
-            EditText username = (EditText)findViewById(R.id.userid);
+            EditText user_email = (EditText)findViewById(R.id.user_email);
             Intent signupIntent = getIntent();
-            username.setText(signupIntent.getStringExtra("Username"));
+            user_email.setText(signupIntent.getStringExtra("User_email"));
         }
 
         TextView login = (TextView) findViewById(R.id.loginButton);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
-                Log.d("IntentLog", "Root go");
-                startActivity(loginIntent);
+                loginUser(user_emailET.getText().toString(),
+                        passwordET.getText().toString());
             }
         });
-/*
 
 
-        TextView signup = (TextView)findViewById(R.id.signup);
+        signup = (TextView)findViewById(R.id.signup);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                //Intent signupIntent = new Intent(LoginActivity.this, SignUp.class);
-                //startActivity(signupIntent);
-                Log.d(TAG, "singup btn pressed");
+            public void onClick(View view) {
+                final View register_layout = LayoutInflater.from(LoginActivity.this)
+                        .inflate(R.layout.register_layout, null);
+
+                new MaterialStyledDialog.Builder(LoginActivity.this)
+                        .setIcon(R.drawable.ic_user)
+                        .setTitle("REGISTRATION")
+                        .setDescription("Please fill all fields")
+                        .setCustomView(register_layout)
+                        .setNegativeText("CANCEL")
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setPositiveText("REGISTER")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+                                MaterialEditText edt_register_email = (MaterialEditText)register_layout.findViewById(R.id.edt_email);
+                                MaterialEditText edt_register_name = (MaterialEditText)register_layout.findViewById(R.id.edt_name);
+                                MaterialEditText edt_register_password = (MaterialEditText)register_layout.findViewById(R.id.edt_password);
+
+                                if (TextUtils.isEmpty(edt_register_email.getText().toString()))
+                                {
+                                    Log.d("MainActivity", "email!!!!");
+                                    Toast.makeText(LoginActivity.this, "Email cannot be null or empty", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                                if (TextUtils.isEmpty(edt_register_name.getText().toString()))
+                                {
+                                    Toast.makeText(LoginActivity.this, "Name cannot be null or empty", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                                if (TextUtils.isEmpty(edt_register_password.getText().toString()))
+                                {
+                                    Toast.makeText(LoginActivity.this, "Password cannot be null or empty", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+
+                                registerUser(edt_register_email.getText().toString(),
+                                        edt_register_name.getText().toString(),
+                                        edt_register_password.getText().toString());
+                            }
+                        }).show();
             }
         });
-*/
+
 
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList("public_profile", "email"));
@@ -146,6 +220,54 @@ public class LoginActivity extends AppCompatActivity {
         Profile.getCurrentProfile();
     }
 
+    private void registerUser(String email, String name, String password) {
+        compositeDisposable.add(iMyService.registerUser(email, name, password)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String response) throws Exception {
+                        Toast.makeText(LoginActivity.this, ""+response, Toast.LENGTH_SHORT).show();
+                    }
+                }));
+    }
+
+    private void loginUser(final String email, final String password) {
+        if (TextUtils.isEmpty(email))
+        {
+            Toast.makeText(this, "Email cannot be null or empty", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (TextUtils.isEmpty(password))
+        {
+            Toast.makeText(this, "Password cannot be null or empty", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        compositeDisposable.add(iMyService.loginUser(email, password)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String response) throws Exception {
+                        Toast.makeText(LoginActivity.this, response, Toast.LENGTH_LONG).show();
+                        if (response.equals("\"Login success\"")) {
+                            LoginSuccess(email, password);
+                        }
+                    }
+                }));
+
+    }
+
+    private void LoginSuccess(String email, String password) {
+        Log.e("################", "Accesss!!!!!!!!!!!!!");
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.putExtra("email", email);
+        intent.putExtra("password", password);
+        startActivity(intent);
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -184,7 +306,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d("userData",last_name);
                     Log.d("userData",id);
                     Log.d("userData",email);
-                    usernameET.setText(email);
+                    user_emailET.setText(email);
                     passwordET.setText(first_name);
                     //RequestOptions requestOptions = new RequestOptions();
                     //requestOptions.dontAnimate();

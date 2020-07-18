@@ -34,13 +34,13 @@
             android:textSize="15dp"
             android:textColor="#FFF"
             android:textStyle="bold"
-            android:text="Username"
+            android:text="Email"
 
             android:fontFamily="@font/gillsans"
             />
 
         <EditText
-            android:id="@+id/userid"
+            android:id="@+id/user_email"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:ems="10"
@@ -72,7 +72,7 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/userid"
+            app:layout_constraintTop_toBottomOf="@id/user_email"
             android:textColor="#FFF"
             />
 
