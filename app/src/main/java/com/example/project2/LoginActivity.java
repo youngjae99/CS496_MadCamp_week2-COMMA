@@ -151,17 +151,17 @@ public class LoginActivity extends AppCompatActivity {
                                 if (TextUtils.isEmpty(edt_register_email.getText().toString()))
                                 {
                                     Log.d("MainActivity", "email!!!!");
-                                    Toast.makeText(LoginActivity.this, "Email cannot be null or empty", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this, "Email cannot be null or empty", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
                                 if (TextUtils.isEmpty(edt_register_name.getText().toString()))
                                 {
-                                    Toast.makeText(LoginActivity.this, "Name cannot be null or empty", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this, "Name cannot be null or empty", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
                                 if (TextUtils.isEmpty(edt_register_password.getText().toString()))
                                 {
-                                    Toast.makeText(LoginActivity.this, "Password cannot be null or empty", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this, "Password cannot be null or empty", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
@@ -195,7 +195,14 @@ public class LoginActivity extends AppCompatActivity {
                                     email = object.getString("email");
                                     Log.v("Name = ", " " + name);
                                     Log.v("Email = ", " " + email);
-                                    Toast.makeText(getApplicationContext(), "Name " + name, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Name " + name, Toast.LENGTH_SHORT).show();
+
+                                    Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                    Log.d("IntentLog", "string - "+name+email+profileImg);
+                                    loginIntent.putExtra("Username", name);
+                                    loginIntent.putExtra("UserEmail", email);
+                                    loginIntent.putExtra("UserPhoto", profileImg);
+                                    startActivity(loginIntent);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -235,12 +242,12 @@ public class LoginActivity extends AppCompatActivity {
     private void loginUser(final String email, final String password) {
         if (TextUtils.isEmpty(email))
         {
-            Toast.makeText(this, "Email cannot be null or empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Email cannot be null or empty", Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(password))
         {
-            Toast.makeText(this, "Password cannot be null or empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Password cannot be null or empty", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -250,7 +257,7 @@ public class LoginActivity extends AppCompatActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String response) throws Exception {
-                        Toast.makeText(LoginActivity.this, response, Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, response, Toast.LENGTH_SHORT).show();
                         if (response.equals("\"Login success\"")) {
                             LoginSuccess(email, password);
                         }
@@ -273,12 +280,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
 
-        Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
-        Log.d("IntentLog", "string - "+this.name+this.email+this.profileImg);
-        loginIntent.putExtra("Username", name);
-        loginIntent.putExtra("UserEmail", email);
-        loginIntent.putExtra("UserPhoto", profileImg);
-        startActivity(loginIntent);
+
     }
 
     AccessTokenTracker tokenTracker = new AccessTokenTracker() {
