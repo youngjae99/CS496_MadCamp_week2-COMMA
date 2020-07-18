@@ -76,14 +76,18 @@ public class LoginActivity extends AppCompatActivity {
             Intent signupIntent = getIntent();
             username.setText(signupIntent.getStringExtra("Username"));
         }
-/*
+
         TextView login = (TextView) findViewById(R.id.loginButton);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                Log.d("IntentLog", "Root go");
+                startActivity(loginIntent);
             }
         });
+/*
+
 
         TextView signup = (TextView)findViewById(R.id.signup);
         signup.setOnClickListener(new View.OnClickListener() {
