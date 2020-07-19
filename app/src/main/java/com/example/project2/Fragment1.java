@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import com.example.project2.Retrofit.IMyService;
 import com.example.project2.Retrofit.RetrofitClient;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -24,6 +26,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class Fragment1 extends Fragment{
@@ -57,6 +62,7 @@ public class Fragment1 extends Fragment{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -64,14 +70,41 @@ public class Fragment1 extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment1, container, false);
-
+        ArrayList<Person> phone_address= new ArrayList<>();
+        ContactAdapter contactAdapter = new ContactAdapter(getContext(), R.layout.contact_layout, phone_address);
         lv = (ListView) v.findViewById(R.id.list);
-        //ArrayList<Person> phone_address = ContactUtil.getAddressBook(getContext());
+        lv.setAdapter(contactAdapter);
 
-        ArrayList<Person> phone_address = new ArrayList<>();
+        /*Call<String> users = iMyService.getUser();
+        users.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.i("Test1", ""+response.body());
+                try {
+                    JSONArray jsonArray = new JSONArray(response.body());
+                    for (int i=0; i<jsonArray.length(); i++){
+                        String name = jsonArray.getJSONObject(i).getString("name");
+                        String email = jsonArray.getJSONObject(i).getString("email");
+                        String phone_number = jsonArray.getJSONObject(i).getString("phone_number");
+                        Log.i("유저 정보", name + " / " + email + " / " + phone_number);
+                        phone_address.add(new Person(name, email, phone_number));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });*/
+
+        Log.i("여기", "입장");
         Retrofit retrofitClient = RetrofitClient.getInstance();
         IMyService iMyService = retrofitClient.create(IMyService.class);
+        //ArrayList<Person> phone_address = ContactUtil.getAddressBook(getContext());
         CompositeDisposable compositeDisposable = new CompositeDisposable();
         compositeDisposable.add(iMyService.getUser()
                 .subscribeOn(Schedulers.io())
@@ -80,25 +113,24 @@ public class Fragment1 extends Fragment{
                     @Override
                     public void accept(String response) throws Exception {
                         JSONArray jsonArray = new JSONArray(response);
-                        for (int i=0; i<jsonArray.length(); i++){
+                        for (int i=0; i<jsonArray.length(); i++) {
                             String name = jsonArray.getJSONObject(i).getString("name");
                             String email = jsonArray.getJSONObject(i).getString("email");
                             String phone_number = jsonArray.getJSONObject(i).getString("phone_number");
                             Log.i("유저 정보", name + " / " + email + " / " + phone_number);
-                            phone_address.add(new Person(name, email, phone_number));
+                            contactAdapter.getItems(new Person(name, email, phone_number));
                         }
-                        Log.i("result check", ""+phone_address.size());
-                        ContactAdapter contactAdapter = new ContactAdapter(getContext(), R.layout.contact_layout, phone_address);
-                        lv.setAdapter(contactAdapter);
-                        lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
-                        {
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long rowID)
-                            {
-                                doSelectFriend((Person)parent.getItemAtPosition(position));
-                            }});
+                        contactAdapter.notifyDataSetChanged();
                     }
                 }));
+        Log.i("End", "Game");
 
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long rowID)
+            {
+                doSelectFriend((Person)parent.getItemAtPosition(position));
+            }});
         return v;
     }
 

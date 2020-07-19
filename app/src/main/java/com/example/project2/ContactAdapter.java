@@ -19,7 +19,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ContactAdapter extends ArrayAdapter<Person> {
-    private ArrayList<Person> items;
+    private ArrayList<Person> items=null;
     private final Context mContext;
 
     public ContactAdapter(Context context, int textViewResourceId, ArrayList<Person> items)
@@ -27,6 +27,10 @@ public class ContactAdapter extends ArrayAdapter<Person> {
         super(context, textViewResourceId, items);
         this.mContext = context;
         this.items = items;
+    }
+
+    public void getItems(Person items){
+        this.items.add(items);
     }
 
     @Override

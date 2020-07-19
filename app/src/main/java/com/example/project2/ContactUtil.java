@@ -62,7 +62,7 @@ public class ContactUtil {
             personlist.add(Item);
         }
         ArrayList<Person> result = new ArrayList<>(personlist);*/
-
+        /*
         ArrayList<Person> result = new ArrayList<Person>();
         Retrofit retrofitClient = RetrofitClient.getInstance();
         IMyService iMyService = retrofitClient.create(IMyService.class);
@@ -82,9 +82,9 @@ public class ContactUtil {
                             result.add(new Person(name, email, phone_number));
                         }
                     }
-                }));
-        Log.i("result check", ""+result.size());
-        return result;
+                }));*/
+
+        return null;
         /*Call<String> users = iMyService.getUser();
         users.enqueue(new Callback<String>() {
             @Override

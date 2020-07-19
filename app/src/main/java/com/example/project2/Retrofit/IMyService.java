@@ -22,7 +22,10 @@ public interface IMyService {
                                  @Field("password") String password);
     @GET("print_all")
     Observable<String> getUser();
-
+    /*
+    @GET("print_all")
+    Call<String> getUser();
+    */
     @POST("getcontact")
     @FormUrlEncoded
     Observable<String> getContact(@Field("email") String email);
