@@ -102,6 +102,8 @@ public class LoginActivity extends AppCompatActivity {
         passwordET=(EditText) findViewById(R.id.password);
         circleImageView = findViewById(R.id.circleImageView);
 
+        checkLoginStatus();
+
         callbackManager = CallbackManager.Factory.create();
 
         if(getIntent().getExtras() != null){
@@ -119,6 +121,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        checkLoginStatus(); // 이미 로그인 되어있는 상태인지 체크 -> 바로 main activity
 
         signup = (TextView)findViewById(R.id.signup);
         signup.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +146,6 @@ public class LoginActivity extends AppCompatActivity {
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-
                                 MaterialEditText edt_register_email = (MaterialEditText)register_layout.findViewById(R.id.edt_email);
                                 MaterialEditText edt_register_name = (MaterialEditText)register_layout.findViewById(R.id.edt_name);
                                 MaterialEditText edt_register_password = (MaterialEditText)register_layout.findViewById(R.id.edt_password);
@@ -180,9 +182,9 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        LoginButton loginButton = (LoginButton) findViewById(R.id.fb_loginBtn);
         loginButton.setReadPermissions(Arrays.asList("public_profile", "email"));
-        checkLoginStatus();
+
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -302,8 +304,8 @@ public class LoginActivity extends AppCompatActivity {
         protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
             if(currentAccessToken==null){
                 // null 상황
+                Log.d("LoginActivity","currentAccessToken == null");
             }
-
         }
     };
 
@@ -339,8 +341,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void checkLoginStatus(){
+        Log.d("LoginActivity", "startcheck login status");
+        if(AccessToken.isCurrentAccessTokenActive()){
+            Log.d("LoginActivity", "active");
+        }
         if(AccessToken.getCurrentAccessToken()!=null){
-            loadUserProfile(AccessToken.getCurrentAccessToken());
+            Log.d("LoginActivity", "already login");
+            Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+            Log.d("IntentLog", "string - "+name+email+profileImg);
+            loginIntent.putExtra("UserName", name+"(Facebook)");
+            loginIntent.putExtra("UserEmail", email);
+            startActivity(loginIntent);
         }
     }
 
