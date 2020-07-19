@@ -37,8 +37,9 @@
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="229dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:fontFamily="@font/gillsans"
                     android:gravity="center"
                     android:text="Title"
@@ -49,7 +50,7 @@
                 <TextView
                     android:layout_weight="1"
                     android:id="@+id/username"
-                    android:layout_width="match_parent"
+                    android:layout_width="186dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="username" />
@@ -62,9 +63,8 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="530dp"
+        android:layout_height="625dp"
 
-        app:layout_anchor="@+id/view_pager"
         app:layout_anchorGravity="center"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 

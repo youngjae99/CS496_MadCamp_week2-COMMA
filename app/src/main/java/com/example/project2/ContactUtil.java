@@ -4,9 +4,29 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.util.Log;
+import android.widget.Toast;
 
+import androidx.appcompat.view.menu.MenuBuilder;
+
+import com.example.project2.Retrofit.IMyService;
+import com.example.project2.Retrofit.RetrofitClient;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class ContactUtil {
 
@@ -18,7 +38,7 @@ public class ContactUtil {
      */
     public static ArrayList<Person> getAddressBook(Context context, boolean isIDD)
     {
-        Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+        /*Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
         String[] projection = new String[]{
                 ContactsContract.CommonDataKinds.Phone.NUMBER,
                 ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
@@ -41,9 +61,56 @@ public class ContactUtil {
 
             personlist.add(Item);
         }
-        ArrayList<Person> result = new ArrayList<>(personlist);
+        ArrayList<Person> result = new ArrayList<>(personlist);*/
+
+        ArrayList<Person> result = new ArrayList<Person>();
+        Retrofit retrofitClient = RetrofitClient.getInstance();
+        IMyService iMyService = retrofitClient.create(IMyService.class);
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+        compositeDisposable.add(iMyService.getUser()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String response) throws Exception {
+                        JSONArray jsonArray = new JSONArray(response);
+                        for (int i=0; i<jsonArray.length(); i++){
+                            String name = jsonArray.getJSONObject(i).getString("name");
+                            String email = jsonArray.getJSONObject(i).getString("email");
+                            String phone_number = jsonArray.getJSONObject(i).getString("phone_number");
+                            Log.i("유저 정보", name + " / " + email + " / " + phone_number);
+                            result.add(new Person(name, email, phone_number));
+                        }
+                    }
+                }));
+        Log.i("result check", ""+result.size());
         return result;
+        /*Call<String> users = iMyService.getUser();
+        users.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.i("Test1", response.body());
+                try {
+                    JSONArray jsonArray = new JSONArray(response.body());
+                    for (int i=0; i<jsonArray.length(); i++){
+                        String name = jsonArray.getJSONObject(i).getString("name");
+                        String email = jsonArray.getJSONObject(i).getString("email");
+                        Log.i("유저 정보", name + " / " + email);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+        return result;*/
     }
+
     /**
      * 주소록의 이름, 전화번호 맵을 가져온다
      * @param context

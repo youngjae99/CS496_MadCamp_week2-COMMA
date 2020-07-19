@@ -7,10 +7,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/edt_email"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
+        android:id="@+id/edt_name"
+        android:hint="Name"
+        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:met_textColorHint="@color/myTextColor"
@@ -19,9 +20,20 @@
         />
 
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/edt_name"
-        android:hint="Name"
+        android:id="@+id/edt_phone_number"
+        android:hint="Phone number"
         android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:met_textColorHint="@color/myTextColor"
+        app:met_baseColor="@color/myTextColor"
+        app:met_primaryColor="@color/myTextColor"
+        />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/edt_email"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:met_textColorHint="@color/myTextColor"

@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
                                 MaterialEditText edt_register_email = (MaterialEditText)register_layout.findViewById(R.id.edt_email);
                                 MaterialEditText edt_register_name = (MaterialEditText)register_layout.findViewById(R.id.edt_name);
                                 MaterialEditText edt_register_password = (MaterialEditText)register_layout.findViewById(R.id.edt_password);
-
+                                MaterialEditText edt_phone_number = (MaterialEditText)register_layout.findViewById(R.id.edt_phone_number);
                                 if (TextUtils.isEmpty(edt_register_email.getText().toString()))
                                 {
                                     Log.d("MainActivity", "email!!!!");
@@ -164,10 +164,16 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, "Password cannot be null or empty", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
+                                if (TextUtils.isEmpty(edt_phone_number.getText().toString()))
+                                {
+                                    Toast.makeText(LoginActivity.this, "Phone number cannot be null or empty", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
 
                                 registerUser(edt_register_email.getText().toString(),
                                         edt_register_name.getText().toString(),
-                                        edt_register_password.getText().toString());
+                                        edt_register_password.getText().toString(),
+                                        edt_phone_number.getText().toString());
                             }
                         }).show();
             }
@@ -199,9 +205,9 @@ public class LoginActivity extends AppCompatActivity {
 
                                     Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
                                     Log.d("IntentLog", "string - "+name+email+profileImg);
-                                    loginIntent.putExtra("Username", name);
+                                    loginIntent.putExtra("UserName", name+"(Facebook)");
                                     loginIntent.putExtra("UserEmail", email);
-                                    loginIntent.putExtra("UserPhoto", profileImg);
+                                    //loginIntent.putExtra("UserPhoto", profileImg);
                                     startActivity(loginIntent);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -227,8 +233,8 @@ public class LoginActivity extends AppCompatActivity {
         Profile.getCurrentProfile();
     }
 
-    private void registerUser(String email, String name, String password) {
-        compositeDisposable.add(iMyService.registerUser(email, name, password)
+    private void registerUser(String email, String name, String password, String phone_number) {
+        compositeDisposable.add(iMyService.registerUser(email, name, password, phone_number)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
@@ -258,11 +264,14 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void accept(String response) throws Exception {
                         String[] res_list = response.split("/");
-                        String[] res_list2 = res_list[1].split("\"");
                         if (res_list[0].equals("\"Login success")) {
+                            String[] res_list2 = res_list[1].split("\"");
                             LoginSuccess(email, res_list2[0]);
+                            Toast.makeText(LoginActivity.this, "Welcome "+res_list2[0] +"!!", Toast.LENGTH_LONG).show();
                         }
-                        Toast.makeText(LoginActivity.this, "Welcome "+res_list2[0] +"!!", Toast.LENGTH_LONG).show();
+                        else{
+                            Toast.makeText(LoginActivity.this, response, Toast.LENGTH_LONG).show();
+                        }
                     }
                 }));
 
