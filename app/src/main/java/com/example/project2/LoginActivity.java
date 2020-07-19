@@ -199,6 +199,7 @@ public class LoginActivity extends AppCompatActivity {
                                 try {
                                     name = object.getString("name");
                                     email = object.getString("email");
+                                    Log.e("페이스북 정보", ""+object);
                                     Log.v("Name = ", " " + name);
                                     Log.v("Email = ", " " + email);
                                     Toast.makeText(getApplicationContext(), "Name " + name, Toast.LENGTH_SHORT).show();

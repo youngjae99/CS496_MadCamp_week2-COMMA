@@ -20,6 +20,10 @@ public interface IMyService {
     @FormUrlEncoded
     Observable<String> loginUser(@Field("email") String email,
                                  @Field("password") String password);
-    @GET("print")
+    @GET("print_all")
     Observable<String> getUser();
+
+    @POST("getcontact")
+    @FormUrlEncoded
+    Observable<String> getContact(@Field("email") String email);
 }
