@@ -3,12 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="@android:color/transparent"
     tools:context=".FullScreenActivity">
 
-    <ImageView
+    <ProgressBar
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:id="@+id/progress"
+        android:theme="@style/colored_progressbar"
+        android:visibility="visible"
+        />
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/fullScreenImageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/fullScreenImageView"/>
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom">
+    </LinearLayout>
 
 </FrameLayout>
