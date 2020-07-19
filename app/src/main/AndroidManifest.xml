@@ -33,6 +33,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
+            
         </activity>
+        <activity
+            android:name=".FullScreenActivity"
+            android:theme="@style/Transparent" />
     </application>
 </manifest>
