@@ -1,10 +1,31 @@
 package com.example.project2;
 
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 public class ChatroomActivity extends AppCompatActivity {
 
@@ -25,11 +46,10 @@ public class ChatroomActivity extends AppCompatActivity {
     private boolean startTyping = false;
     private int time = 2;
 
-    /*
     private Socket mSocket;
     {
         try {
-            mSocket = IO.socket("http://192.249.19.242:6480");
+            mSocket = IO.socket("http://192.249.19.242:6380");
         } catch (URISyntaxException e) {}
     }
 
@@ -52,7 +72,7 @@ public class ChatroomActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.chatroom_layout);
 
         Username = getIntent().getStringExtra("username");
 
@@ -303,6 +323,6 @@ public class ChatroomActivity extends AppCompatActivity {
         }else {
             Log.i(TAG, "onDestroy: is rotating.....");
         }
-    } */
+    }
 
 }

@@ -89,6 +89,14 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("LoginActivity", "checking...");
+        if(AccessToken.getCurrentAccessToken()!=null){
+            Log.d("LoginActivity", "in onCreate already login");
+            Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+            loginIntent.putExtra("UserName", name);
+            loginIntent.putExtra("UserEmail", email);
+            startActivity(loginIntent);
+        }
 
         //Init Service
         Retrofit retrofitClient = RetrofitClient.getInstance();
@@ -101,8 +109,6 @@ public class LoginActivity extends AppCompatActivity {
         user_emailET=(EditText) findViewById(R.id.user_email);
         passwordET=(EditText) findViewById(R.id.password);
         circleImageView = findViewById(R.id.circleImageView);
-
-        checkLoginStatus();
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -181,42 +187,119 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         LoginButton loginButton = (LoginButton) findViewById(R.id.fb_loginBtn);
         loginButton.setReadPermissions(Arrays.asList("public_profile", "email"));
+
+        /*
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+
+            }
+            @Override
+            public void onCancel() {
+                Log.d("LoginCancel","login canceled");
+            }
+            @Override
+            public void onError(FacebookException error) {
+                Log.e("LoginErr",error.toString());
+            }
+        });
+        */
+
 
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                GraphRequest request = GraphRequest.newMeRequest(
-                        loginResult.getAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(
-                                    JSONObject object,
-                                    GraphResponse response) {
-                                Log.v("LoginActivity Response ", response.toString());
+                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        Log.v("LoginActivity Response ", response.toString());
+                        try {
+                            name = object.getString("name");
+                            email = object.getString("email");
+                            Log.e("페이스북 정보", ""+object);
+                            Log.v("Name = ", " " + name);
+                            Log.v("Email = ", " " + email);
+                            Toast.makeText(getApplicationContext(), "Name " + name, Toast.LENGTH_SHORT).show();
 
-                                try {
-                                    name = object.getString("name");
-                                    email = object.getString("email");
-                                    Log.e("페이스북 정보", ""+object);
-                                    Log.v("Name = ", " " + name);
-                                    Log.v("Email = ", " " + email);
-                                    Toast.makeText(getApplicationContext(), "Name " + name, Toast.LENGTH_SHORT).show();
+                            compositeDisposable.add(iMyService.facebookLogin(email, name)
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(new Consumer<String>() {
+                                        @Override
+                                        public void accept(String response) throws Exception {
+                                            String[] res_list = response.split("/");
+                                            if (res_list[0].equals("\"Ok")) { //이미 등록된 페북 계정이면
+                                                String[] res_list2 = res_list[1].split("\"");
+                                                LoginSuccess(email, res_list2[0]);
+                                                Toast.makeText(LoginActivity.this, "Welcome "+res_list2[0] +"!!", Toast.LENGTH_LONG).show();
 
-                                    Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
-                                    Log.d("IntentLog", "string - "+name+email+profileImg);
-                                    loginIntent.putExtra("UserName", name+"(Facebook)");
-                                    loginIntent.putExtra("UserEmail", email);
-                                    //loginIntent.putExtra("UserPhoto", profileImg);
-                                    startActivity(loginIntent);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
+                                                Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                                Log.d("GotoMain", "already registered fb "+name+email);
+                                                loginIntent.putExtra("UserName", name+"(Facebook)");
+                                                loginIntent.putExtra("UserEmail", email);
+                                                //loginIntent.putExtra("UserPhoto", profileImg);
+                                                startActivity(loginIntent);
+                                            }
+                                            else{
+                                                //폰번호 만들기
+                                                Toast.makeText(LoginActivity.this, response, Toast.LENGTH_LONG).show();
+
+                                                final View register_layout = LayoutInflater.from(LoginActivity.this)
+                                                        .inflate(R.layout.fb_register_layout, null);
+
+                                                new MaterialStyledDialog.Builder(LoginActivity.this)
+                                                        .setIcon(R.drawable.ic_user)
+                                                        .setTitle("REGISTRATION")
+                                                        .setDescription("Please enter your phone number")
+                                                        .setCustomView(register_layout)
+                                                        .setNegativeText("CANCEL")
+                                                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                                            @Override
+                                                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                                                dialog.dismiss();
+                                                            }
+                                                        })
+                                                        .setPositiveText("REGISTER")
+                                                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                                            //Log.d("Dialog","created");
+                                                            @Override
+                                                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                                                Log.d("GotoMain", "in");
+                                                                MaterialEditText edt_phone_number = (MaterialEditText)register_layout.findViewById(R.id.edt_phone_number);
+                                                                MaterialEditText edt_register_password = (MaterialEditText)register_layout.findViewById(R.id.edt_password);
+                                                                if (TextUtils.isEmpty(edt_phone_number.getText().toString()))
+                                                                {
+                                                                    Toast.makeText(LoginActivity.this, "Phone number cannot be null or empty", Toast.LENGTH_SHORT).show();
+                                                                    return;
+                                                                }
+                                                                compositeDisposable.add(iMyService.facebookRegister(email, edt_phone_number.getText().toString(), edt_register_password.getText().toString())
+                                                                        .subscribeOn(Schedulers.io())
+                                                                        .observeOn(AndroidSchedulers.mainThread())
+                                                                        .subscribe(new Consumer<String>() {
+                                                                            @Override
+                                                                            public void accept(String response) throws Exception {
+                                                                                Log.d("GotoMain", "new register and login fb "+ name + email);
+                                                                                Toast.makeText(LoginActivity.this, ""+response, Toast.LENGTH_SHORT).show();
+                                                                                Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                                                                loginIntent.putExtra("UserName", name+"(Facebook)");
+                                                                                loginIntent.putExtra("UserEmail", email);
+                                                                                //loginIntent.putExtra("UserPhoto", profileImg);
+                                                                                startActivity(loginIntent);
+                                                                            }
+                                                                        }));
+                                                            }
+                                                        }).show();
+                                            }
+                                        }
+                                    }));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
                 Bundle parameters = new Bundle();
                 parameters.putString("fields", "id,name,email,gender, birthday");
                 request.setParameters(parameters);
@@ -225,7 +308,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onCancel() {
-
+                Log.d("LoginCancel","login canceled");
             }
 
             @Override
@@ -234,6 +317,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         Profile.getCurrentProfile();
+
     }
 
     private void registerUser(String email, String name, String password, String phone_number) {
@@ -295,8 +379,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-
-
     }
 
     AccessTokenTracker tokenTracker = new AccessTokenTracker() {
@@ -305,6 +387,9 @@ public class LoginActivity extends AppCompatActivity {
             if(currentAccessToken==null){
                 // null 상황
                 Log.d("LoginActivity","currentAccessToken == null");
+            }
+            else{
+                loadUserProfile(currentAccessToken);
             }
         }
     };
@@ -324,11 +409,6 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d("userData",last_name);
                     Log.d("userData",id);
                     Log.d("userData",email);
-                    user_emailET.setText(email);
-                    passwordET.setText(first_name);
-                    //RequestOptions requestOptions = new RequestOptions();
-                    //requestOptions.dontAnimate();
-                    Glide.with(LoginActivity.this).load(image_url).into(circleImageView);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

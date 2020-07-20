@@ -16,6 +16,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.BufferedOutputStream;
@@ -40,8 +42,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -52,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         txt_username = (TextView)findViewById(R.id.username);
         txt_username.setText(getIntent().getStringExtra("UserName"));
 
+
+        LoginManager.getInstance().logOut();
         btn_logout = (Button) findViewById(R.id.logout);
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
-
                 finish();
             }
         });

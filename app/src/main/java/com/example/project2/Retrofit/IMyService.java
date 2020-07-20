@@ -20,6 +20,18 @@ public interface IMyService {
     @FormUrlEncoded
     Observable<String> loginUser(@Field("email") String email,
                                  @Field("password") String password);
+
+    @POST("facebook_login_check")
+    @FormUrlEncoded
+    Observable<String> facebookLogin(@Field("email") String email,
+                                 @Field("name") String name);
+
+    @POST("facebook_login_number_push")
+    @FormUrlEncoded
+    Observable<String> facebookRegister(@Field("email") String email,
+                                     @Field("phone_number") String number,
+                                    @Field("password") String password);
+
     @GET("print_all")
     Observable<String> getUser();
     /*
