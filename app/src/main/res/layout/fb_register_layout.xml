@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">]
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="User Name : ">
+    </TextView>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/edt_phone_number"
+        android:hint="Phone number"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:met_textColorHint="@color/myTextColor"
+        app:met_baseColor="@color/myTextColor"
+        app:met_primaryColor="@color/myTextColor"
+        />
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/edt_password"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:met_textColorHint="@color/myTextColor"
+        app:met_baseColor="@color/myTextColor"
+        app:met_primaryColor="@color/myTextColor"
+        />
+</LinearLayout>

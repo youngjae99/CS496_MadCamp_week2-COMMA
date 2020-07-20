@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/color1_1"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -16,7 +16,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/color1_1">
+            android:background="@color/white">
             <!--
             <ImageView
                 android:layout_width="70dp"
@@ -45,7 +45,7 @@
                     android:fontFamily="@font/gillsans"
                     android:gravity="center"
                     android:text="Title"
-                    android:textColor="#fff"
+                    android:textColor="#000"
                     android:textSize="30dp"
                     android:textStyle="bold" />
 
@@ -56,7 +56,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="username"
-                    android:textColor="@android:color/white"/>
+                    android:textColor="@android:color/black"/>
 
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -66,46 +66,45 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-<<<<<<< HEAD
-        android:layout_height="434dp"
-=======
         android:layout_height="match_parent"
         android:layout_weight="1"
->>>>>>> 473dd6f0a375f8ea4aa67f03c2e7f737775b1099
-
         app:layout_anchorGravity="center"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_gravity="bottom"
-        android:background="@color/color1_2"
-        app:tabTextColor="@color/white"
-        app:tabSelectedTextColor="@color/color2">
+        android:layout_height="wrap_content"
+        android:theme="@style/TabTheme">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/ic_menu1"
-            android:text=""/>
-        <!-- android:text="Contact" -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="bottom"
+            app:tabTextColor="@color/white">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/ic_menu2"
-            android:text=""/>
-        <!-- android:text="Gallery" -->
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_menu1"
+                android:text=""/>
+            <!-- android:text="Contact" -->
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/ic_menu3"
-            android:text=""/>
-        <!-- android:text="Tab3" -->
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_menu2"
+                android:text=""/>
+            <!-- android:text="Gallery" -->
 
-    </com.google.android.material.tabs.TabLayout>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_menu3"
+                android:text=""/>
+            <!-- android:text="Tab3" -->
+
+        </com.google.android.material.tabs.TabLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
 </LinearLayout>
