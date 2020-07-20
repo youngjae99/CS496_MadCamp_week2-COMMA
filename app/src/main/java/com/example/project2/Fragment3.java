@@ -33,8 +33,13 @@ public class Fragment3 extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment3, container, false);
-        Button startChatBtn = (Button) v.findViewById(R.id.chatStartBtn);
 
+
+        
+
+
+
+        Button startChatBtn = (Button) v.findViewById(R.id.chatStartBtn);
         startChatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

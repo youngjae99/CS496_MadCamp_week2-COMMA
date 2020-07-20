@@ -41,5 +41,7 @@
         <activity android:name=".ChatroomActivity"/>
         <activity android:name=".NewContact"/>
         <activity android:name=".delete_Contact"/>
+
+        <activity android:name=".PopupActivity" android:theme="@android:style/Theme.Dialog" />
     </application>
 </manifest>

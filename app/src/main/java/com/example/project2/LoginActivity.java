@@ -215,9 +215,11 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             name = object.getString("name");
                             email = object.getString("email");
+                            profileImg = "https://graph.facebook.com/"+object.getString("id")+"/picture?type=normal";
                             Log.e("페이스북 정보", ""+object);
                             Log.v("Name = ", " " + name);
                             Log.v("Email = ", " " + email);
+                            Log.v("ProfileImg = ", " " + profileImg);
 
                             compositeDisposable.add(iMyService.facebookLogin(email, name)
                                     .subscribeOn(Schedulers.io())
@@ -231,9 +233,10 @@ public class LoginActivity extends AppCompatActivity {
                                                 Toast.makeText(LoginActivity.this, "Welcome "+res_list2[0], Toast.LENGTH_LONG).show();
 
                                                 Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
-                                                Log.d("GotoMain", "already registered fb "+name+" "+email);
+                                                Log.d("GotoMain", "already registered fb "+name+" "+email+" "+profileImg);
                                                 loginIntent.putExtra("UserName", name+"(Facebook)");
                                                 loginIntent.putExtra("UserEmail", email);
+                                                loginIntent.putExtra("profileImgURL", profileImg);
                                                 //loginIntent.putExtra("UserPhoto", profileImg);
                                                 startActivity(loginIntent);
                                                 //finish();

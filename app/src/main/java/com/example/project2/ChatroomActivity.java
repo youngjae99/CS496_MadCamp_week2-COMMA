@@ -49,8 +49,10 @@ public class ChatroomActivity extends AppCompatActivity {
     private Socket mSocket;
     {
         try {
-            mSocket = IO.socket("http://192.249.19.242:6380");
-        } catch (URISyntaxException e) {}
+            mSocket = IO.socket("http://192.249.19.242/public:6380");
+        } catch (URISyntaxException e) {
+
+        }
     }
 
     @SuppressLint("HandlerLeak")

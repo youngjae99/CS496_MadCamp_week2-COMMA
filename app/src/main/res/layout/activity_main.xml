@@ -15,7 +15,11 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
             android:background="@color/white">
             <!--
             <ImageView
@@ -26,39 +30,41 @@
                 android:tint="@android:color/black"
                 />
 -->
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
                 android:orientation="horizontal">
 
-                <Button
+                <ImageView
                     android:id="@+id/logout"
-                    android:text="logout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_logout"
+                    android:tint="@color/color1"/>
 
+                <ImageView
+                    android:id="@+id/splashLogo"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/comma_logo"
+                    android:tint="@color/color1" />
 
-                <TextView
-                    android:layout_width="229dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/gillsans"
-                    android:gravity="center"
-                    android:text="COMMA"
-                    android:textColor="#000"
-                    android:textSize="30dp"
-                    android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/profileImg"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_person"
+                    android:tint="@color/color1"/>
 
-                <TextView
-                    android:layout_weight="1"
-                    android:id="@+id/username"
-                    android:layout_width="186dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="username"
-                    android:textColor="@android:color/black"/>
-
-            </LinearLayout>
+            </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -74,6 +80,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:theme="@style/TabTheme">
 
         <com.google.android.material.tabs.TabLayout

@@ -1,11 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment2">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:textSize="20dp"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/modelicab"
+            android:textColor="@color/color1">
+        </TextView>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="horizontal"
+            android:columnCount="3"
+            android:horizontalSpacing="10dp"
+            android:layout_marginBottom="15dp">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="fill_horizontal"
+                android:layout_columnWeight="1"
+                android:id="@+id/profile1"/>
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="fill_horizontal"
+                android:layout_columnWeight="1"
+                android:id="@+id/profile2"/>
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="fill_horizontal"
+                android:layout_columnWeight="1"
+                android:id="@+id/profile3"/>
+
+        </GridLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Friends"
+        android:textSize="20dp"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/modelicab"
+        android:textColor="@color/color1">
+    </TextView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView2"
         android:layout_width="match_parent"
@@ -19,4 +71,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         />
-</FrameLayout>
+</LinearLayout>

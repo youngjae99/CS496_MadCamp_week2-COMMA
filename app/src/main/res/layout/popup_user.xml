@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content">
+
+    <!-- 타이틀바 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/userTo"
+            android:text="To. OOO"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:fontFamily="@font/modelicab"
+            android:gravity="center"
+            android:background="@drawable/rounded_corner"
+            android:layout_width="match_parent"
+            android:layout_height="53dp" />
+    </LinearLayout>
+    <!-- //end 타이틀바 -->
+
+    <!-- Notice -->
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/txtText"
+            android:text="Profile"
+            android:textSize="15dp"
+            android:textColor="#000"
+            android:alpha="0.87"
+            android:gravity="left"
+            android:layout_marginBottom="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:columnCount="3"
+            android:horizontalSpacing="10dp"
+            android:layout_marginBottom="15dp">
+            <ImageView
+                app:layout_constraintDimensionRatio="H,1:1"
+                android:layout_gravity="fill_horizontal"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:id="@+id/profile1"/>
+            <ImageView
+                app:layout_constraintDimensionRatio="H,1:1"
+                android:layout_gravity="fill_horizontal"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:id="@+id/profile2"/>
+            <ImageView
+                app:layout_constraintDimensionRatio="H,1:1"
+                android:layout_gravity="fill_horizontal"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:id="@+id/profile3"/>
+
+        </GridLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="익명으로 보내고 싶은 메세지를 입력해주세요">
+        </EditText>
+
+    </LinearLayout>
+    <!-- Notice -->
+
+    <View
+        android:background="#66bdbdbd"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <!-- close btn -->
+    <Button
+        android:id="@+id/send"
+        android:text="Send"
+        android:textSize="15dp"
+        android:padding="16dp"
+        android:gravity="center"
+        android:background="@color/color1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="mOnClose"/>
+
+    <!--// close btn -->
+</LinearLayout>
