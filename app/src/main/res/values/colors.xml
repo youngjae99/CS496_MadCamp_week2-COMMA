@@ -2,7 +2,9 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#FFF</color>
+    <color name="colorAccent">#5FC6B5</color>
+
+    <color name="typing">#FF36C44B</color>
 
     <color name="grey">#848282</color>
     <color name="lightgrey">#a6FFFFFF</color>
@@ -13,5 +15,14 @@
     <color name="skyblue">#4BB4E9</color>
 
     <color name="myTextColor">#AFAFAF</color>
+
+    <color name="color1">#1A1B1F</color>
+    <color name="color1_1">#232429</color>
+    <color name="color1_2">#28292C</color>
+    <color name="color2">#5FC6B5</color>
+    <color name="color3">#4E5360</color>
+    <color name="color4">#F7F7F8</color>
+
+
 
 </resources>

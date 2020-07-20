@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/color1_1"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -15,7 +16,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white">
+            android:background="@color/color1_1">
             <!--
             <ImageView
                 android:layout_width="70dp"
@@ -44,7 +45,7 @@
                     android:fontFamily="@font/gillsans"
                     android:gravity="center"
                     android:text="Title"
-                    android:textColor="#000"
+                    android:textColor="#fff"
                     android:textSize="30dp"
                     android:textStyle="bold" />
 
@@ -54,7 +55,8 @@
                     android:layout_width="186dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="username" />
+                    android:text="username"
+                    android:textColor="@android:color/white"/>
 
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -73,8 +75,12 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom">
+        android:layout_height="70dp"
+        android:layout_gravity="bottom"
+        android:background="@color/color1_2"
+        app:tabTextColor="@color/white"
+        app:tabSelectedTextColor="@color/color2">
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
