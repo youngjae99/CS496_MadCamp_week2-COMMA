@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,8 +18,10 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.BufferedOutputStream;
@@ -30,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private Button btn_logout;
+    private ImageView btn_logout;
+    private ImageView profile;
     private TextView txt_username;
 
     private Fragment1 fragment1;
@@ -39,11 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.e("createdmain","created!!!");
         setTitle("");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -55,14 +57,22 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.view_pager); //탭별 화면 보이는 view pager
         tabLayout = findViewById(R.id.tab_layout); //탭바
+        profile = findViewById(R.id.profileImg); //프로필 이미지 뷰
 
-        txt_username = (TextView)findViewById(R.id.username);
-        txt_username.setText(getIntent().getStringExtra("UserName"));
+        //txt_username = (TextView)findViewById(R.id.username); // 사용자 이름 표시
+        //txt_username.setText(getIntent().getStringExtra("UserName"));
+        Glide.with(this) // 사용자 프로필 이미지 표시
+                .load(getIntent().getStringExtra("profileImgURL")) // 웹 이미지 로드
+                //.load(localPhotoList.get(i).getImgPath()) // 이미지 로드
+                .override(500,500) //해상도 최적화
+                .thumbnail(0.3f) //섬네일 최적화. 지정한 %만큼 미리 이미지를 가져와 보여주기
+                .centerCrop() // 중앙 크롭
+                .into(profile);
 
         Log.e("createdmain","created "+getIntent().getStringExtra("UserName"));
 
         LoginManager.getInstance().logOut();
-        btn_logout = (Button) findViewById(R.id.logout);
+        btn_logout = (ImageView) findViewById(R.id.logout);
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
