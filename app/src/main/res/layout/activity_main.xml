@@ -15,7 +15,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/white">
             <!--
             <ImageView
@@ -26,39 +26,53 @@
                 android:tint="@android:color/black"
                 />
 -->
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="35dp"
                 android:orientation="horizontal">
 
-                <Button
+                <ImageView
                     android:id="@+id/logout"
-                    android:text="logout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/ic_logout" />
 
                 <TextView
-                    android:layout_width="229dp"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/gillsans"
                     android:gravity="center"
+                    android:layout_centerInParent="true"
                     android:text="COMMA"
                     android:textColor="#000"
                     android:textSize="30dp"
                     android:textStyle="bold" />
 
+                <!--
                 <TextView
-                    android:layout_weight="1"
                     android:id="@+id/username"
-                    android:layout_width="186dp"
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:gravity="center"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="9dp"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:gravity="right"
                     android:text="username"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black"
+                    tools:ignore="RtlCompat" /> -->
 
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/profileImg"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_person" />
+
+            </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -74,6 +88,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:theme="@style/TabTheme">
 
         <com.google.android.material.tabs.TabLayout
