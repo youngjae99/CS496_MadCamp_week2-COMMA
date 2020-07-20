@@ -1,6 +1,7 @@
 package com.example.project2;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
@@ -131,6 +133,18 @@ public class Fragment1 extends Fragment{
             {
                 doSelectFriend((Person)parent.getItemAtPosition(position));
             }});
+
+        ImageButton newContact = (ImageButton) v.findViewById(R.id.newContact);
+        newContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Intent
+                Context context2 = v.getContext();                                                    // Context 수정
+                Intent newPostIntent = new Intent(context2, NewContact.class);
+                startActivity(newPostIntent);
+            }
+        });
+
         return v;
     }
 

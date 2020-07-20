@@ -39,5 +39,6 @@
             android:name=".FullScreenActivity"
             android:theme="@style/Transparent" />
         <activity android:name=".ChatroomActivity"/>
+        <activity android:name=".NewContact"/>
     </application>
 </manifest>
