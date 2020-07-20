@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#000"
+        android:background="@color/color1"
         android:gravity="center_horizontal">
 
         <TextView
@@ -23,8 +23,8 @@
             android:textSize="60dp"
             android:textColor="#FFF"
             android:textStyle="bold"
-            android:text="Title"
-            android:fontFamily="@font/gillsans"
+            android:text="COMMA"
+            android:fontFamily="@font/modelicab"
             />
 
         <TextView
@@ -75,17 +75,16 @@
             app:layout_constraintTop_toBottomOf="@id/user_email"
             android:textColor="#FFF"
             />
-
         <TextView
             android:id="@+id/loginButton"
-            android:layout_width="200dp"
+            android:layout_width="190dp"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:text="Login"
             android:textSize="20dp"
             android:gravity="center"
-            android:textColor="#000"
-            android:background="#fff"
+            android:textColor="@color/color1"
+            android:background="@drawable/login_btn"
             android:fontFamily="@font/gillsansb"
             />
         <TextView
@@ -116,9 +115,7 @@
                 android:textSize="16dp"
                 android:textColor="#FFF"
                 android:text="You don't have a account? "
-
                 />
-
             <TextView
                 android:id="@+id/signup"
                 android:layout_width="100dp"
@@ -130,17 +127,7 @@
                 android:text="SIGN UP "
                 android:clickable="true"
                 />
-
         </LinearLayout>
-        <ImageView
-            android:id="@+id/circleImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="2dp"
-            app:layout_constraintDimensionRatio="H,1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
 
 </LinearLayout>

@@ -89,9 +89,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("LoginActivity", "checking...");
         if(AccessToken.getCurrentAccessToken()!=null){
-            Log.d("LoginActivity", "in onCreate already login");
+            Log.d("GotoMain", "login status-true");
             Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
             loginIntent.putExtra("UserName", name);
             loginIntent.putExtra("UserEmail", email);
@@ -108,7 +107,6 @@ public class LoginActivity extends AppCompatActivity {
         data=new ArrayList<String>();
         user_emailET=(EditText) findViewById(R.id.user_email);
         passwordET=(EditText) findViewById(R.id.password);
-        circleImageView = findViewById(R.id.circleImageView);
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -124,10 +122,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loginUser(user_emailET.getText().toString(),
                         passwordET.getText().toString());
+                finish();
             }
         });
 
-        checkLoginStatus(); // 이미 로그인 되어있는 상태인지 체크 -> 바로 main activity
+        //checkLoginStatus(); // 이미 로그인 되어있는 상태인지 체크 -> 바로 main activity
 
         signup = (TextView)findViewById(R.id.signup);
         signup.setOnClickListener(new View.OnClickListener() {
@@ -158,7 +157,7 @@ public class LoginActivity extends AppCompatActivity {
                                 MaterialEditText edt_phone_number = (MaterialEditText)register_layout.findViewById(R.id.edt_phone_number);
                                 if (TextUtils.isEmpty(edt_register_email.getText().toString()))
                                 {
-                                    Log.d("MainActivity", "email!!!!");
+                                    Log.d("MainActivity", "email!");
                                     Toast.makeText(LoginActivity.this, "Email cannot be null or empty", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
@@ -207,8 +206,6 @@ public class LoginActivity extends AppCompatActivity {
         });
         */
 
-
-
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -222,7 +219,6 @@ public class LoginActivity extends AppCompatActivity {
                             Log.e("페이스북 정보", ""+object);
                             Log.v("Name = ", " " + name);
                             Log.v("Email = ", " " + email);
-                            Toast.makeText(getApplicationContext(), "Name " + name, Toast.LENGTH_SHORT).show();
 
                             compositeDisposable.add(iMyService.facebookLogin(email, name)
                                     .subscribeOn(Schedulers.io())
@@ -233,15 +229,15 @@ public class LoginActivity extends AppCompatActivity {
                                             String[] res_list = response.split("/");
                                             if (res_list[0].equals("\"Ok")) { //이미 등록된 페북 계정이면
                                                 String[] res_list2 = res_list[1].split("\"");
-                                                LoginSuccess(email, res_list2[0]);
-                                                Toast.makeText(LoginActivity.this, "Welcome "+res_list2[0] +"!!", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(LoginActivity.this, "Welcome "+res_list2[0], Toast.LENGTH_LONG).show();
 
                                                 Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
-                                                Log.d("GotoMain", "already registered fb "+name+email);
+                                                Log.d("GotoMain", "already registered fb "+name+" "+email);
                                                 loginIntent.putExtra("UserName", name+"(Facebook)");
                                                 loginIntent.putExtra("UserEmail", email);
                                                 //loginIntent.putExtra("UserPhoto", profileImg);
                                                 startActivity(loginIntent);
+                                                //finish();
                                             }
                                             else{
                                                 //폰번호 만들기
@@ -288,6 +284,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                                 loginIntent.putExtra("UserEmail", email);
                                                                                 //loginIntent.putExtra("UserPhoto", profileImg);
                                                                                 startActivity(loginIntent);
+                                                                                //finish();
                                                                             }
                                                                         }));
                                                             }
@@ -305,7 +302,6 @@ public class LoginActivity extends AppCompatActivity {
                 request.setParameters(parameters);
                 request.executeAsync();
             }
-
             @Override
             public void onCancel() {
                 Log.d("LoginCancel","login canceled");
@@ -317,7 +313,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         Profile.getCurrentProfile();
-
     }
 
     private void registerUser(String email, String name, String password, String phone_number) {

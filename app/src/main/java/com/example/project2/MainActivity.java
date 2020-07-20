@@ -2,6 +2,7 @@ package com.example.project2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.e("createdmain","created!!!");
         setTitle("");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         txt_username = (TextView)findViewById(R.id.username);
         txt_username.setText(getIntent().getStringExtra("UserName"));
 
+        Log.e("createdmain","created "+getIntent().getStringExtra("UserName"));
 
         LoginManager.getInstance().logOut();
         btn_logout = (Button) findViewById(R.id.logout);

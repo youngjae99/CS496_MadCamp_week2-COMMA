@@ -24,7 +24,7 @@
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat"
+            android:theme="@style/AppTheme.NoActionBar"
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation">
             <intent-filter>

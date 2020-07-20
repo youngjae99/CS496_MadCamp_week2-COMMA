@@ -44,7 +44,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/gillsans"
                     android:gravity="center"
-                    android:text="Title"
+                    android:text="COMMA"
                     android:textColor="#000"
                     android:textSize="30dp"
                     android:textStyle="bold" />
@@ -79,7 +79,7 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:layout_gravity="bottom"
             app:tabTextColor="@color/white">
 
