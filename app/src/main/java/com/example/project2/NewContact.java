@@ -22,15 +22,14 @@ public class NewContact extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.list);
         ArrayList<Person> phone_address = ContactUtil.getAddressBook(this);
-        ContactAdapter personAdapter = new ContactAdapter(this, R.layout.contact_layout, phone_address);
-        lv.setAdapter(personAdapter);
+        ContactAdapter contactAdapter = new ContactAdapter(this, R.layout.contact_layout, phone_address);
+        lv.setAdapter(contactAdapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             public void onItemClick(AdapterView<?> parent, View view, int position, long rowID)
             {
                 doSelectFriend((Person)parent.getItemAtPosition(position));
             }});
-
     }
     // 연락처 list click했을 경우
     public void doSelectFriend(Person p)
