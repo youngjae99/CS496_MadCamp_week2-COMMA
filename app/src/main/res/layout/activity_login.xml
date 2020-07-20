@@ -15,17 +15,14 @@
         android:background="@color/color1"
         android:gravity="center_horizontal">
 
-        <TextView
-            android:layout_width="300dp"
+        <ImageView
+            android:id="@+id/splashLogo"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:gravity="center"
-            android:textSize="60dp"
-            android:textColor="#FFF"
-            android:textStyle="bold"
-            android:text="COMMA"
-            android:fontFamily="@font/modelicab"
-            />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/comma_logo"
+            android:tint="@color/white" />
 
         <TextView
             android:layout_width="300dp"
