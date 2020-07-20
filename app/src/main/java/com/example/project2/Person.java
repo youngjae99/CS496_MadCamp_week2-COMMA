@@ -4,21 +4,23 @@ public class Person {
     private String Name;
     private String Number;
     private String Email;
+    private Long Photo_id;
     //private Long Photo_id;
     //private Long Person_id;
 
     public Person() {}
 
-    public Person(String name, String email, String number)
+    public Person(String name, String email, String number, Long photo_id)
     {
         this.Name = name;
         this.Email = email;
         this.Number = number;
+        this.Photo_id = photo_id;
     }
 
-    //public Long getPhoto_id() { return Photo_id; }
+    public Long getPhoto_id() { return Photo_id; }
 
-    //public void setPhoto_id(Long photo_id) { this.Photo_id = photo_id; }
+    public void setPhoto_id(Long photo_id) { this.Photo_id = photo_id; }
 
     //public Long getPerson_id() { return Person_id; }
 

@@ -120,7 +120,7 @@ public class Fragment1 extends Fragment{
                             String email = jsonArray.getJSONObject(i).getString("email");
                             String phone_number = jsonArray.getJSONObject(i).getString("phone_number");
                             Log.i("유저 정보", name + " / " + email + " / " + phone_number);
-                            contactAdapter.getItems(new Person(name, email, phone_number));
+                            contactAdapter.getItems(new Person(name, email, phone_number, new Long(0)));
                         }
                         contactAdapter.notifyDataSetChanged();
                     }

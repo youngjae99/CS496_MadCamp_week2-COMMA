@@ -20,7 +20,7 @@ public class NewContact extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_contact);
 
-        lv = (ListView) findViewById(R.id.list);
+        lv = (ListView) findViewById(R.id.add_user_list);
         ArrayList<Person> phone_address = ContactUtil.getAddressBook(this);
         ContactAdapter contactAdapter = new ContactAdapter(this, R.layout.contact_layout, phone_address);
         lv.setAdapter(contactAdapter);

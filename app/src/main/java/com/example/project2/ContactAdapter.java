@@ -49,14 +49,14 @@ public class ContactAdapter extends ArrayAdapter<Person> {
         TextView number = (TextView) v.findViewById(R.id.msg);
         TextView email = (TextView) v.findViewById(R.id.email);
 
-        /*Bitmap photo_bitmap = loadPhoto(mContext.getContentResolver(), p.getPerson_id(), p.getPhoto_id());
+        Bitmap photo_bitmap = loadPhoto(mContext.getContentResolver(), p.getPhoto_id());
 
         if (photo_bitmap != null) {
             photo.setImageBitmap(photo_bitmap);
         }
         else {
             photo.setImageResource(R.drawable.ic_launcher_foreground);
-        }*/
+        }
         // round 이미지
         /*photo.setBackground(new ShapeDrawable(new OvalShape()));
         if (Build.VERSION.SDK_INT>=21) {
@@ -69,7 +69,7 @@ public class ContactAdapter extends ArrayAdapter<Person> {
         return v;
     }
 
-    /*public Bitmap loadPhoto(ContentResolver cr, long id, long photo_id) {
+    public Bitmap loadPhoto(ContentResolver cr, long photo_id) {
         byte[] photoBytes = null;
         Uri photoUri = ContentUris.withAppendedId(ContactsContract.Data.CONTENT_URI, photo_id);
         Cursor c = cr.query(photoUri, new String[]{ContactsContract.CommonDataKinds.Photo.PHOTO},
@@ -99,6 +99,6 @@ public class ContactAdapter extends ArrayAdapter<Person> {
 
         rBitmap = Bitmap.createScaledBitmap(oBitmap, 100, 80, true);
         return rBitmap;
-    }*/
+    }
 
 }

@@ -21,12 +21,14 @@ public class GalleryManager {
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         String[] projection = {
                 MediaStore.MediaColumns.DATA,
-                MediaStore.Images.Media.DATE_ADDED
+                MediaStore.Images.Media.DATE_ADDED,
+                MediaStore.Images.Media._ID
         };
         Cursor cursor = mContext.getContentResolver().query(uri, projection, null, null, null);
         int columnIndexData = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
         while (cursor.moveToNext()){
             imgFormat temp = new imgFormat(cursor.getString(columnIndexData),false);
+            //photo_db_push(cursor.getLong(2));
             photoList.add(temp);
             Log.d("GalleryManager", "path->" + temp.getImgPath());
         }
