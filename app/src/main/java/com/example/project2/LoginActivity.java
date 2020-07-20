@@ -122,7 +122,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loginUser(user_emailET.getText().toString(),
                         passwordET.getText().toString());
-                finish();
             }
         });
 
@@ -352,7 +351,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Welcome "+res_list2[0] +"!!", Toast.LENGTH_LONG).show();
                         }
                         else{
-                            Toast.makeText(LoginActivity.this, response, Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, response+"우와아앙", Toast.LENGTH_LONG).show();
                         }
                     }
                 }));

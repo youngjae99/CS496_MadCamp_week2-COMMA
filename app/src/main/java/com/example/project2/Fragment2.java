@@ -36,12 +36,12 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
         // Required empty public constructor
     }
 
-    public static Fragment2 newInstance(String param1, String param2) {
+    public static Fragment2 newinstance() {
         Fragment2 fragment = new Fragment2();
-        Bundle args = new Bundle();
+        /*Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        fragment.setArguments(args);*/
         return fragment;
     }
 

@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private Button btn_logout;
     private TextView txt_username;
+    String user_name;
+    String user_email;
 
     private Fragment1 fragment1;
     private Fragment2 fragment2;
@@ -57,9 +59,11 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout); //탭바
 
         txt_username = (TextView)findViewById(R.id.username);
-        txt_username.setText(getIntent().getStringExtra("UserName"));
+        user_name = getIntent().getStringExtra("UserName");
+        user_email = getIntent().getStringExtra("UserEmail");
+        txt_username.setText(user_name);
 
-        Log.e("createdmain","created "+getIntent().getStringExtra("UserName"));
+        Log.e("createdmain","created "+user_name);
 
         LoginManager.getInstance().logOut();
         btn_logout = (Button) findViewById(R.id.logout);
@@ -95,6 +99,23 @@ public class MainActivity extends AppCompatActivity {
         private List<Fragment> fragments = new ArrayList<>();
         private List<String> fragmentTitle = new ArrayList<>();
 
+
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return Fragment1.newinstance(user_email);
+                case 1:
+                    return Fragment2.newinstance();
+                case 2:
+                    return Fragment3.newinstance();
+                default:
+                    return null;
+            }
+
+        }
+
         public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
             super(fm, behavior);
         }
@@ -104,11 +125,12 @@ public class MainActivity extends AppCompatActivity {
             fragmentTitle.add(title);
         }
 
+        /*
         @NonNull
         @Override
         public Fragment getItem(int position) {
             return fragments.get(position);
-        }
+        }*/
 
         @Override
         public int getCount() {

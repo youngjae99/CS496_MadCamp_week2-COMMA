@@ -38,7 +38,19 @@ public interface IMyService {
     @GET("print_all")
     Call<String> getUser();
     */
-    @POST("getcontact")
+    @POST("getContact")
     @FormUrlEncoded
     Observable<String> getContact(@Field("email") String email);
+
+    @POST("AddContact")
+    @FormUrlEncoded
+    Observable<String> AddContact(@Field("user_email") String user_email,
+                                  @Field("name") String name,
+                                  @Field("email") String email,
+                                  @Field("phone_number") String phone_number);
+
+    @POST("DeleteContact")
+    @FormUrlEncoded
+    Observable<String> DeleteContact(@Field("user_email") String user_email,
+                                     @Field("email") String email);
 }

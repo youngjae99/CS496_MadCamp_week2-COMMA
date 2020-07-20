@@ -20,4 +20,24 @@
         android:layout_margin="20dp"
         android:elevation="5dp" />
 
+    <ImageButton
+    android:id="@+id/refresh"
+    android:src="@drawable/ic_refresh"
+    android:background="@drawable/button_click"
+    android:layout_width="60dp"
+    android:layout_height="60dp"
+    android:layout_gravity="right|top"
+    android:layout_margin="20dp"
+    android:elevation="5dp" />
+
+    <ImageButton
+        android:id="@+id/delete_Contact"
+        android:src="@drawable/ic_minus"
+        android:background="@drawable/button_click"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="right|center"
+        android:layout_margin="20dp"
+        android:elevation="5dp" />
+
 </FrameLayout>

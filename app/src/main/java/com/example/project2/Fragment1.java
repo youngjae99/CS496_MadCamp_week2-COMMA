@@ -3,6 +3,7 @@ package com.example.project2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
@@ -37,22 +39,18 @@ public class Fragment1 extends Fragment{
 
     private RecyclerView recyclerView;
     private ListView lv;
+    String user_email;
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
 
     public Fragment1() {
         // Required empty public constructor
 
     }
 
-    public static Fragment1 newInstance(String param1, String param2) {
+    public static Fragment1 newinstance(String email) {
         Fragment1 fragment = new Fragment1();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("email", email);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,8 +59,7 @@ public class Fragment1 extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            user_email = getArguments().getString("email");
         }
 
     }
@@ -77,38 +74,12 @@ public class Fragment1 extends Fragment{
         lv = (ListView) v.findViewById(R.id.list);
         lv.setAdapter(contactAdapter);
 
-        /*Call<String> users = iMyService.getUser();
-        users.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("Test1", ""+response.body());
-                try {
-                    JSONArray jsonArray = new JSONArray(response.body());
-                    for (int i=0; i<jsonArray.length(); i++){
-                        String name = jsonArray.getJSONObject(i).getString("name");
-                        String email = jsonArray.getJSONObject(i).getString("email");
-                        String phone_number = jsonArray.getJSONObject(i).getString("phone_number");
-                        Log.i("유저 정보", name + " / " + email + " / " + phone_number);
-                        phone_address.add(new Person(name, email, phone_number));
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });*/
 
         Log.i("여기", "입장");
         Retrofit retrofitClient = RetrofitClient.getInstance();
         IMyService iMyService = retrofitClient.create(IMyService.class);
-        //ArrayList<Person> phone_address = ContactUtil.getAddressBook(getContext());
         CompositeDisposable compositeDisposable = new CompositeDisposable();
-        compositeDisposable.add(iMyService.getUser()
+        compositeDisposable.add(iMyService.getContact(user_email)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
@@ -138,15 +109,54 @@ public class Fragment1 extends Fragment{
         newContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent
-                Context context2 = v.getContext();                                                    // Context 수정
-                Intent newPostIntent = new Intent(context2, NewContact.class);
+                Intent newPostIntent = new Intent(v.getContext(), NewContact.class);
+                newPostIntent.putExtra("user_email", user_email);
                 startActivity(newPostIntent);
+
+            }
+        });
+
+        ImageButton delete_Contact = (ImageButton) v.findViewById(R.id.delete_Contact);
+        delete_Contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newPostIntent = new Intent(v.getContext(), delete_Contact.class);
+                newPostIntent.putExtra("user_email", user_email);
+                startActivity(newPostIntent);
+
+            }
+        });
+        ImageView imageView;
+        Drawable a;
+        ImageButton refresh = (ImageButton) v.findViewById(R.id.refresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CompositeDisposable compositeDisposable = new CompositeDisposable();
+                compositeDisposable.add(iMyService.getContact(user_email)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<String>() {
+                            @Override
+                            public void accept(String response) throws Exception {
+                                contactAdapter.clear();
+                                JSONArray jsonArray = new JSONArray(response);
+                                for (int i=0; i<jsonArray.length(); i++) {
+                                    String name = jsonArray.getJSONObject(i).getString("name");
+                                    String email = jsonArray.getJSONObject(i).getString("email");
+                                    String phone_number = jsonArray.getJSONObject(i).getString("phone_number");
+                                    Log.i("유저 정보", name + " / " + email + " / " + phone_number);
+                                    contactAdapter.getItems(new Person(name, email, phone_number, new Long(0)));
+                                }
+                                contactAdapter.notifyDataSetChanged();
+                            }
+                        }));
             }
         });
 
         return v;
     }
+
 
     public void doSelectFriend(Person p)
     {

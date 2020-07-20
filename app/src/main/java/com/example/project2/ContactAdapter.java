@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -16,11 +17,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class ContactAdapter extends ArrayAdapter<Person> {
-    private ArrayList<Person> items=null;
+    private ArrayList<Person> items;
     private final Context mContext;
+
+    private ViewHolder mViewHolder;
 
     public ContactAdapter(Context context, int textViewResourceId, ArrayList<Person> items)
     {
@@ -28,11 +33,11 @@ public class ContactAdapter extends ArrayAdapter<Person> {
         this.mContext = context;
         this.items = items;
     }
-
+    public void clear() { this.items.clear(); }
     public void getItems(Person items){
         this.items.add(items);
     }
-
+    public void deleteItems(int position) { this.items.remove(position); }
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
@@ -41,30 +46,29 @@ public class ContactAdapter extends ArrayAdapter<Person> {
         {
             LayoutInflater vi = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = vi.inflate(R.layout.contact_layout, null);
+            mViewHolder = new ViewHolder(v);
+            v.setTag(mViewHolder);
         }
-        Person p = items.get(position);
+        else mViewHolder = (ViewHolder) v.getTag();
 
-        ImageView photo = (ImageView) v.findViewById(R.id.photo);
-        TextView name = (TextView) v.findViewById(R.id.name);
-        TextView number = (TextView) v.findViewById(R.id.msg);
-        TextView email = (TextView) v.findViewById(R.id.email);
+        Person p = items.get(position);
 
         Bitmap photo_bitmap = loadPhoto(mContext.getContentResolver(), p.getPhoto_id());
 
         if (photo_bitmap != null) {
-            photo.setImageBitmap(photo_bitmap);
+            mViewHolder.photo.setImageBitmap(photo_bitmap);
         }
         else {
-            photo.setImageResource(R.drawable.ic_launcher_foreground);
+            mViewHolder.photo.setImageResource(R.drawable.ic_launcher_foreground);
         }
         // round 이미지
         /*photo.setBackground(new ShapeDrawable(new OvalShape()));
         if (Build.VERSION.SDK_INT>=21) {
             photo.setClipToOutline(true);
         }*/
-        name.setText(p.getName());
-        number.setText(p.getNumber());
-        email.setText(p.getEmail());
+        mViewHolder.name.setText(p.getName());
+        mViewHolder.number.setText(p.getNumber());
+        mViewHolder.email.setText(p.getEmail());
 
         return v;
     }
@@ -99,6 +103,24 @@ public class ContactAdapter extends ArrayAdapter<Person> {
 
         rBitmap = Bitmap.createScaledBitmap(oBitmap, 100, 80, true);
         return rBitmap;
+    }
+    public class ViewHolder {
+
+        private ImageView photo;
+        private TextView name;
+        private TextView number;
+        private TextView email;
+
+
+        public ViewHolder(View convertView) {
+
+            photo = (ImageView) convertView.findViewById(R.id.photo);
+            name = (TextView) convertView.findViewById(R.id.name);
+            number = (TextView) convertView.findViewById(R.id.msg);
+            email = (TextView) convertView.findViewById(R.id.email);
+
+        }
+
     }
 
 }

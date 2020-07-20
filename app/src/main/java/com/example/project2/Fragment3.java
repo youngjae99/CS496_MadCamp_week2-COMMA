@@ -18,6 +18,11 @@ public class Fragment3 extends Fragment{
 
     }
 
+    public static Fragment3 newinstance(){
+        Fragment3 fragment = new Fragment3();
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
