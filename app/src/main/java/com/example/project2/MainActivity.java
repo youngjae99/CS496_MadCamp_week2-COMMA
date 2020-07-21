@@ -1,11 +1,9 @@
 package com.example.project2;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,11 +20,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.bumptech.glide.Glide;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
-import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.material.tabs.TabLayout;
-import com.iammert.library.AnimatedTabLayout;
 
-import java.io.BufferedOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     return Fragment2.newinstance(user_email);
                 case 2:
-                    return Fragment3.newinstance();
+                    return Fragment3.newinstance(user_email);
                 default:
                     return null;
             }

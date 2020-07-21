@@ -32,7 +32,7 @@
         android:text="Button" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myList"
+        android:id="@+id/messageList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"

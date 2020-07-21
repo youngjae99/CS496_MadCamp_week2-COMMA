@@ -10,11 +10,14 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project2.Retrofit.IMyService;
 import com.example.project2.Retrofit.RetrofitClient;
 
 import org.json.JSONArray;
+
+import java.util.ArrayList;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -24,19 +27,28 @@ import retrofit2.Retrofit;
 
 public class Fragment3 extends Fragment{
 
+    MessageAdapter messageAdapter;
+    RecyclerView recyclerView;
+    String user_email;
+
     public Fragment3() {
         // Required empty public constructor
-
     }
 
-    public static Fragment3 newinstance(){
+    public static Fragment3 newinstance(String email){
         Fragment3 fragment = new Fragment3();
+        Bundle args = new Bundle();
+        args.putString("email", email);
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            user_email = getArguments().getString("email");
+        }
     }
 
     @Override
@@ -45,17 +57,15 @@ public class Fragment3 extends Fragment{
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment3, container, false);
 
-/*
         ArrayList<MessageFormat> messagelist= new ArrayList<>();
-        contactAdapter = new ContactAdapter(getContext(), R.layout.contact_layout, phone_address);
-        lv = (ListView) v.findViewById(R.id.list);
-        lv.setAdapter(contactAdapter);
+        messageAdapter = new MessageAdapter(getActivity().getApplicationContext(), messagelist);
+        recyclerView = (RecyclerView) v.findViewById(R.id.messageList);
+        recyclerView.setAdapter(messageAdapter);
 
-        Log.i("여기", "입장");
-        retrofitClient = RetrofitClient.getInstance();
-        iMyService = retrofitClient.create(IMyService.class);
+        Retrofit retrofitClient = RetrofitClient.getInstance();
+        IMyService iMyService = retrofitClient.create(IMyService.class);
         CompositeDisposable compositeDisposable = new CompositeDisposable();
-        compositeDisposable.add(iMyService.getContact(user_email)
+        compositeDisposable.add(iMyService.Get_Message(user_email)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
@@ -64,17 +74,18 @@ public class Fragment3 extends Fragment{
                         JSONArray jsonArray = new JSONArray(response);
                         for (int i=0; i<jsonArray.length(); i++) {
                             String name = jsonArray.getJSONObject(i).getString("name");
-                            String email = jsonArray.getJSONObject(i).getString("email");
-                            String phone_number = jsonArray.getJSONObject(i).getString("phone_number");
-                            Log.i("유저 정보", name + " / " + email + " / " + phone_number);
-                            contactAdapter.getItems(new Person(name, email, phone_number, new Long(0)));
+                            String msg = jsonArray.getJSONObject(i).getString("msg");
+                            String hide = jsonArray.getJSONObject(i).getString("visible");
+
+                            Log.e("메세지 정보", name +" / "+msg +" / "+hide);
+                            messageAdapter.getItems(new MessageFormat(name, msg, hide));
                         }
-                        contactAdapter.notifyDataSetChanged();
+                        messageAdapter.notifyDataSetChanged();
                     }
                 }));
         Log.i("End", "Game");
 
- */
+
 
         return v;
     }

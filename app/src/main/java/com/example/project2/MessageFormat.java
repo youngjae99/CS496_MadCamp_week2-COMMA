@@ -4,12 +4,12 @@ public class MessageFormat {
 
     private String Username;
     private String Message;
-    private String UniqueId;
+    private String Hide;
 
-    public MessageFormat(String uniqueId, String username, String message) {
+    public MessageFormat(String username, String message, String hide) {
         Username = username;
         Message = message;
-        UniqueId = uniqueId;
+        Hide = hide;
     }
 
     public String getUsername() {
@@ -28,11 +28,11 @@ public class MessageFormat {
         Message = message;
     }
 
-    public String getUniqueId() {
-        return UniqueId;
+    public String getHide() {
+        return Hide;
     }
 
-    public void setUniqueId(String uniqueId) {
-        UniqueId = uniqueId;
+    public void setHide(String hide) {
+        Hide = hide;
     }
 }

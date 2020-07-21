@@ -79,5 +79,9 @@ public interface IMyService {
                                @Field("user_email") String user_email,
                                @Field("msg") String msg);
 
+    @POST("Get_Message")
+    @FormUrlEncoded
+    Observable<String> Get_Message(@Field("email") String email);
+
 
 }
