@@ -12,61 +12,90 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <soup.neumorphism.NeumorphTextView
-            android:id="@+id/textview"
-            style="@style/Widget.Neumorph.TextView"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
-            android:text="My Profile Photo"
+            android:layout_marginBottom="10dp"
+            android:text="My Profile"
+            android:textSize="20dp"
             android:textColor="@color/color1"
-            android:textSize="26dp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/montserrat_bold"/>
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:orientation="horizontal"
             android:columnCount="3"
-            android:horizontalSpacing="10dp"
+            android:horizontalSpacing="2dp"
             android:layout_marginBottom="15dp">
 
-            <ImageView
+            <soup.neumorphism.NeumorphCardView
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="fill_horizontal"
                 android:layout_columnWeight="1"
-                android:id="@+id/my_profile1"
-                android:src="@drawable/ic_launcher_foreground"/>
-            <ImageView
+                android:layout_margin="-7dp"
+                app:neumorph_shapeType="pressed">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/my_profile1"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_foreground"/>
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="fill_horizontal"
                 android:layout_columnWeight="1"
-                android:id="@+id/my_profile2"
-                android:src="@drawable/ic_launcher_foreground"/>
-            <ImageView
+                android:layout_margin="-7dp"
+                app:neumorph_shapeType="pressed">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/my_profile2"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_foreground"/>
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="fill_horizontal"
                 android:layout_columnWeight="1"
-                android:id="@+id/my_profile3"
-                android:src="@drawable/ic_launcher_foreground"/>
+                android:layout_margin="-7dp"
+                app:neumorph_shapeType="pressed">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/my_profile3"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_foreground"/>
+            </soup.neumorphism.NeumorphCardView>
 
         </GridLayout>
     </LinearLayout>
 
-    <soup.neumorphism.NeumorphTextView
-        android:id="@+id/textview2"
-        style="@style/Widget.Neumorph.TextView"
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/card_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="flat_card,pressed_card" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
         android:text="Friends"
+        android:textSize="20dp"
         android:textColor="@color/color1"
-        android:textSize="26dp"
-        android:textStyle="bold" />
+        android:fontFamily="@font/montserrat_bold"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView2"
         android:layout_width="match_parent"

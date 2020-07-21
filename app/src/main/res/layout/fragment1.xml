@@ -14,32 +14,31 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:orientation="horizontal">
-            <soup.neumorphism.NeumorphTextView
-                android:id="@+id/textview"
-                style="@style/Widget.Neumorph.TextView"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="Contact List"
+                android:text="Contact"
+                android:textSize="20dp"
                 android:textColor="@color/color1"
-                android:textSize="26dp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/montserrat_bold"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_centerInParent="true"
                 android:layout_alignParentRight="true">
                 <soup.neumorphism.NeumorphFloatingActionButton
                     android:id="@+id/newContact"
                     style="@style/Widget.Neumorph.FloatingActionButton"
                     app:neumorph_backgroundColor="@color/color4"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="-10dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/ic_baseline_add_24"
                     app:neumorph_shapeAppearance="@style/CustomShapeAppearance" />
@@ -47,8 +46,8 @@
                     android:id="@+id/delete_Contact"
                     style="@style/Widget.Neumorph.FloatingActionButton"
                     app:neumorph_backgroundColor="@color/color4"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/ic_minus"
                     app:neumorph_shapeAppearance="@style/CustomShapeAppearance" />

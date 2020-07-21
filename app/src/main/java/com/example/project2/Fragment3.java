@@ -46,12 +46,16 @@ public class Fragment3 extends Fragment{
         final View v = inflater.inflate(R.layout.fragment3, container, false);
 
 /*
-        Log.i("Tab3", "enter");
-        Retrofit retrofitClient = RetrofitClient.getInstance();
-        IMyService iMyService = retrofitClient.create(IMyService.class);
-        //ArrayList<Person> phone_address = ContactUtil.getAddressBook(getContext());
+        ArrayList<MessageFormat> messagelist= new ArrayList<>();
+        contactAdapter = new ContactAdapter(getContext(), R.layout.contact_layout, phone_address);
+        lv = (ListView) v.findViewById(R.id.list);
+        lv.setAdapter(contactAdapter);
+
+        Log.i("여기", "입장");
+        retrofitClient = RetrofitClient.getInstance();
+        iMyService = retrofitClient.create(IMyService.class);
         CompositeDisposable compositeDisposable = new CompositeDisposable();
-        compositeDisposable.add(iMyService.getUser()
+        compositeDisposable.add(iMyService.getContact(user_email)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
@@ -68,20 +72,9 @@ public class Fragment3 extends Fragment{
                         contactAdapter.notifyDataSetChanged();
                     }
                 }));
+        Log.i("End", "Game");
 
  */
-
-
-
-        Button startChatBtn = (Button) v.findViewById(R.id.chatStartBtn);
-        startChatBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent chatIntent = new Intent( v.getContext(), ChatroomActivity.class);
-                Log.d("Fragment3", "button clicked");
-                startActivity(chatIntent);
-            }
-        });
 
         return v;
     }

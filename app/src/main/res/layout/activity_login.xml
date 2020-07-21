@@ -14,17 +14,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-
         android:gravity="center_horizontal">
 
         <ImageView
             android:id="@+id/splashLogo"
             android:layout_width="260dp"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:src="@drawable/comma_logo"
             android:tint="@color/color1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="@color/color1"
+            android:textStyle="bold"
+            android:text="COnnect Me &amp; MAdcamp"
+            android:fontFamily="@font/montserrat_bold"
+            />
 
         <TextView
             android:layout_width="300dp"
@@ -38,19 +46,27 @@
             android:fontFamily="@font/montserrat_regular"
             />
 
-        <EditText
-            android:id="@+id/user_email"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:ems="10"
-            android:hint=""
-            android:backgroundTint="#FFF"
-            android:textColor="@color/color1"
-            android:fontFamily="@font/montserrat_regular"
-            android:inputType="text"
+        <soup.neumorphism.NeumorphCardView
+            style="@style/Widget.Neumorph.CardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintStart_toEndOf="@id/flat_card"
+            app:neumorph_shapeType="pressed">
+
+            <EditText
+                android:id="@+id/user_email"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:paddingLeft="20dp"
+                android:hint="abc@comma.com"
+                app:theme="@style/EditTextStyle"
+                android:textColor="@color/color1"
+                android:fontFamily="@font/montserrat_regular"
+                android:inputType="text"
+                />
+        </soup.neumorphism.NeumorphCardView>
 
         <TextView
             android:layout_width="300dp"
@@ -63,19 +79,23 @@
             android:fontFamily="@font/montserrat_regular"
             />
 
+        <soup.neumorphism.NeumorphCardView
+            style="@style/Widget.Neumorph.CardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:neumorph_shapeType="pressed">
         <EditText
             android:id="@+id/password"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:backgroundTint="#FFF"
+            android:paddingLeft="20dp"
+            app:theme="@style/EditTextStyle"
             android:inputType="textPassword"
             android:fontFamily="@font/montserrat_regular"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_email"
             android:textColor="@color/color1"
             />
+        </soup.neumorphism.NeumorphCardView>
 
 
         <soup.neumorphism.NeumorphButton
@@ -87,16 +107,14 @@
             android:layout_marginBottom="0dp"
             android:text="Login"
             android:textColor="@color/color4"
-            android:fontFamily="@font/montserrat_bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:fontFamily="@font/montserrat_bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color1"
             android:text="or"
+            android:layout_marginBottom="10dp"
             android:layout_marginTop="0dp"/>
 
         <com.facebook.login.widget.LoginButton

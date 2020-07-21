@@ -34,6 +34,7 @@
             android:id="@+id/txtText"
             android:text="Profile"
             android:textSize="15dp"
+            android:fontFamily="@font/montserrat_medium"
             android:textColor="#000"
             android:alpha="0.87"
             android:gravity="left"
@@ -82,9 +83,6 @@
             android:layout_height="150dp"
             android:layout_marginTop="10dp"
             android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/flat_card"
-            app:layout_constraintTop_toBottomOf="@id/textview"
             app:neumorph_shapeType="pressed">
             <EditText
                 android:id="@+id/messageBox"

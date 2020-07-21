@@ -1,6 +1,7 @@
 package com.example.project2;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -103,6 +105,34 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
                 startActivityForResult(intent, PICK_FROM_ALBUM1);
             }
         });
+        img1.setOnLongClickListener(new View.OnLongClickListener() { // 롱클릭 -> 이미지 삭제
+            @Override
+            public boolean onLongClick(View view) {
+                AlertDialog.Builder alert_confirm = new AlertDialog.Builder(getContext());
+                alert_confirm.setMessage("Are you sure to delete 1st Profile photo?").setCancelable(false).setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Yes
+                                Log.d("img1","long clicked!!");
+                                img1.setImageURI(null);
+                                change_profile(1, "");
+                            }
+                        }).setNegativeButton("No",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 'No'
+                                return;
+                            }
+                        });
+                AlertDialog alert = alert_confirm.create();
+                alert.show();
+
+                return true;
+            }
+        });
+
         img2 = v.findViewById(R.id.my_profile2);
         img2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +141,33 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 Log.e("fragment2", "출발");
                 startActivityForResult(intent, PICK_FROM_ALBUM2);
+            }
+        });
+        img2.setOnLongClickListener(new View.OnLongClickListener() { // 롱클릭 -> 이미지 삭제
+            @Override
+            public boolean onLongClick(View view) {
+                AlertDialog.Builder alert_confirm = new AlertDialog.Builder(getContext());
+                alert_confirm.setMessage("Are you sure to delete 2nd Profile photo?").setCancelable(false).setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Yes
+                                Log.d("img2","long clicked!!");
+                                img2.setImageURI(null);
+                                change_profile(2, "");
+                            }
+                        }).setNegativeButton("No",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 'No'
+                                return;
+                            }
+                        });
+                AlertDialog alert = alert_confirm.create();
+                alert.show();
+
+                return true;
             }
         });
 
@@ -122,6 +179,32 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 Log.e("fragment2", "출발");
                 startActivityForResult(intent, PICK_FROM_ALBUM3);
+            }
+        });
+        img3.setOnLongClickListener(new View.OnLongClickListener() { // 롱클릭 -> 이미지 삭제
+            @Override
+            public boolean onLongClick(View view) {
+                AlertDialog.Builder alert_confirm = new AlertDialog.Builder(getContext());
+                alert_confirm.setMessage("Are you sure to delete 3rd Profile photo?").setCancelable(false).setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Yes
+                                Log.d("img3","long clicked!!");
+                                img3.setImageURI(null);
+                                change_profile(3, "");
+                            }
+                        }).setNegativeButton("No",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 'No'
+                                return;
+                            }
+                        });
+                AlertDialog alert = alert_confirm.create();
+                alert.show();
+                return true;
             }
         });
 
@@ -156,6 +239,33 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
     }
 
     private void set_profile() {
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+        compositeDisposable.add(iMyService.Get_profile(user_email+"_profile")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String response) throws Exception {
+                        Log.e("profile", "successss");
+                        //response는 user_email_profile의 모든 정보
+                        JSONArray jsonArray = new JSONArray(response);
+                        String bitmap1 = null, bitmap2=null, bitmap3=null;
+                        for (int i=0; i<3; i++){
+                            String number = jsonArray.getJSONObject(i).getString("number");
+                            if (number.equals("1")) bitmap1=jsonArray.getJSONObject(i).getString("bitmap");
+                            if (number.equals("2")) bitmap2=jsonArray.getJSONObject(i).getString("bitmap");
+                            if (number.equals("3")) bitmap3=jsonArray.getJSONObject(i).getString("bitmap");
+                        }
+                        if (bitmap1 != null) img1.setImageBitmap(StringToBitmap(bitmap1));
+                        if (bitmap2 != null) img2.setImageBitmap(StringToBitmap(bitmap2));
+                        if (bitmap3 != null) img3.setImageBitmap(StringToBitmap(bitmap3));
+                    }
+                }));
+    }
+
+    private void delete_profile(){
+        Retrofit retrofitClient = RetrofitClient.getInstance();
+        IMyService iMyService = retrofitClient.create(IMyService.class);
         CompositeDisposable compositeDisposable = new CompositeDisposable();
         compositeDisposable.add(iMyService.Get_profile(user_email+"_profile")
                 .subscribeOn(Schedulers.io())
