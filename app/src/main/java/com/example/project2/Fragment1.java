@@ -3,10 +3,13 @@ package com.example.project2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -122,18 +125,35 @@ public class Fragment1 extends Fragment{
                         .subscribe(new Consumer<String>() {
                             @Override
                             public void accept(String response) throws Exception {
-                                if (response.equals("\"CAN\"")){
+                                if (response.equals("\"CAN\"")){ // 유저 등록되어있는 사람
                                     doSelectFriend((Person)parent.getItemAtPosition(position));
                                 }
-                                else{
-                                    // 불가능!!!!!
-                                    Log.e("#######################", "불가능");
-                                    Uri smsUri = Uri.parse("tel:" + phone_number);
-                                    Intent intent = new Intent(Intent.ACTION_VIEW, smsUri);
-                                    intent.putExtra("address", phone_number);
-                                    intent.putExtra("sms_body", "COMMA 앱 다운받으세요 당장!!!");
-                                    intent.setType("vnd.android-dir/mms-sms");
-                                    startActivity(intent);
+                                else{ // 이용자가 아님 -> 가입 권유
+                                    Log.e("Clicked", "미가입사용자");
+                                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
+                                    View mView = getLayoutInflater().inflate(R.layout.popup_recommend, null);
+
+                                    Button send = (Button) mView.findViewById(R.id.send);
+                                    TextView txtText = (TextView)mView.findViewById(R.id.txtText);
+                                    EditText msgText = (EditText)mView.findViewById(R.id.messageBox);
+                                    txtText.setText(((Person) parent.getItemAtPosition(position)).getName()+" 님은 COMMA에 아직 가입을 안했습니다!\n같이 소통하자고 추천 SMS를 보내보시는건 어떤가요?");
+
+                                    mBuilder.setView(mView);
+                                    final AlertDialog dialog = mBuilder.create();
+                                    dialog.show();
+
+                                    send.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Log.d("clicked","button");
+                                            Uri smsUri = Uri.parse("tel:" + phone_number);
+                                            Intent intent = new Intent(Intent.ACTION_VIEW, smsUri);
+                                            intent.putExtra("address", phone_number);
+                                            intent.putExtra("sms_body", msgText.getText().toString()); // 메세지 내용 불러와서 sms 전달
+                                            intent.setType("vnd.android-dir/mms-sms");
+                                            startActivity(intent);
+                                        }
+                                    });
                                 }
                             }
                         }));
@@ -215,40 +235,11 @@ public class Fragment1 extends Fragment{
         //txtText.setText("익명으로 전달됩니다");
         user.setText("To. "+p.getName());
 
-        for(int i=1; i<=3; i++){
+        img1 = mView.findViewById(R.id.img1);
+        img2 = mView.findViewById(R.id.img2);
+        img3 = mView.findViewById(R.id.img3);
 
-        }
-        ImageView img1 = mView.findViewById(R.id.img1);
-        ImageView img2 = mView.findViewById(R.id.img2);
-        ImageView img3 = mView.findViewById(R.id.img3);
-
-        /*
-        Glide.with(getContext())
-=======
-        img1 = mView.findViewById(R.id.profile1);
-        img2 = mView.findViewById(R.id.profile2);
-        img3 = mView.findViewById(R.id.profile3);
-
-        img1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-            Log.e("여긴가!!", "!!");
-            startActivityForResult(intent, PICK_FROM_ALBUM);
-
-            }
-        });
-
-        /*Glide.with(getContext())
->>>>>>> 315a9a28b7bfe6a8466d8ce018e134e1407e8143
-                //.load(imageUrls.get(i).getImageUrl()) // 웹 이미지 로드
-                .load("qweqweqwe") // 이미지 로드
-                .error(R.drawable.noimage)
-                .override(500,500) //해상도 최적화
-                .thumbnail(0.3f) //섬네일 최적화. 지정한 %만큼 미리 이미지를 가져와 보여주기
-                .centerCrop() // 중앙 크롭
-                .into(img1);*/
+        set_profile(p.getEmail());
 
         mBuilder.setView(mView);
         final AlertDialog dialog = mBuilder.create();
@@ -281,5 +272,41 @@ public class Fragment1 extends Fragment{
         Log.e("변화!!", "1->fragment1");
         img2.setImageURI(data.getData());
         img3.setImageURI(data.getData());
+    }
+
+    private void set_profile(String emaillookingfor) {
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+        compositeDisposable.add(iMyService.Get_profile(emaillookingfor+"_profile")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String response) throws Exception {
+                        Log.e("profile", "successss");
+                        //response는 user_email_profile의 모든 정보
+                        JSONArray jsonArray = new JSONArray(response);
+                        String bitmap1 = null, bitmap2=null, bitmap3=null;
+                        for (int i=0; i<3; i++){
+                            String number = jsonArray.getJSONObject(i).getString("number");
+                            if (number.equals("1")) bitmap1=jsonArray.getJSONObject(i).getString("bitmap");
+                            if (number.equals("2")) bitmap2=jsonArray.getJSONObject(i).getString("bitmap");
+                            if (number.equals("3")) bitmap3=jsonArray.getJSONObject(i).getString("bitmap");
+                        }
+                        if (bitmap1 != null) img1.setImageBitmap(StringToBitmap(bitmap1));
+                        if (bitmap2 != null) img2.setImageBitmap(StringToBitmap(bitmap2));
+                        if (bitmap3 != null) img3.setImageBitmap(StringToBitmap(bitmap3));
+                    }
+                }));
+    }
+
+    public static Bitmap StringToBitmap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 }

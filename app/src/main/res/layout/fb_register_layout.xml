@@ -17,7 +17,7 @@
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/edt_phone_number"
         android:hint="Phone number"
-        android:inputType="text"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:met_textColorHint="@color/myTextColor"

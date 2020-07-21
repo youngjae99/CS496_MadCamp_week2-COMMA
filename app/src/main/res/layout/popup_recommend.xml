@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/rounded_corner2"
+    android:backgroundTint="@color/color4"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content">
+
+    <!-- 타이틀바 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/userTo"
+            android:text="OOPS!"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:fontFamily="@font/modelicab"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="53dp" />
+    </LinearLayout>
+    <!-- //end 타이틀바 -->
+
+    <!-- Notice -->
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/txtText"
+            android:text="000 님은 가입자가 아닙니다. \n가입을 권해보세요!"
+            android:textSize="15dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="#000"
+            android:alpha="0.87"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/pressed_card"
+            style="@style/Widget.Neumorph.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            app:neumorph_shapeType="pressed">
+            <EditText
+                android:id="@+id/messageBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                app:theme="@style/EditTextStyle"
+                android:text="지금 당장 우리가 소통할 수 있는 COMMA 앱을 다운받아보세요!">
+            </EditText>
+        </soup.neumorphism.NeumorphCardView>
+
+    </LinearLayout>
+    <!-- Notice -->
+
+    <View
+        android:background="#66bdbdbd"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <!-- close btn -->
+
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/send"
+        style="@style/Widget.Neumorph.Button"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center"
+        app:neumorph_backgroundColor="@color/color5"
+        android:text="SEND SMS"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gillsansb"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</LinearLayout>
+
+    <!--// close btn -->

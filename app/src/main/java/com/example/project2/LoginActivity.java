@@ -25,6 +25,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -98,7 +99,6 @@ public class LoginActivity extends AppCompatActivity {
             loginIntent.putExtra("UserEmail", email);
             startActivity(loginIntent);
         }
-
 
         //Init Service
         Retrofit retrofitClient = RetrofitClient.getInstance();

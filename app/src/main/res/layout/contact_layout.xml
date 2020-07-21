@@ -73,6 +73,7 @@
                 android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_correct"
+                android:tint="@color/color1"
                 android:visibility="invisible"/>
 
         </LinearLayout>

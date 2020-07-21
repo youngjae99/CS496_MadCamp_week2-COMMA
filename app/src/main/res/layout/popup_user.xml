@@ -46,34 +46,60 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:stretchColumns="1">
-            <TableRow>
-                <ImageView
-                    android:id="@+id/img1"
-                    android:layout_width="0dip"
-                    android:layout_height="100dp"
-                    android:layout_margin="2dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/com_facebook_profile_picture_blank_square"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:orientation="horizontal"
+                android:columnCount="3"
+                android:horizontalSpacing="2dp"
+                android:layout_marginBottom="15dp">
 
-                <ImageView
-                    android:id="@+id/img2"
-                    android:layout_width="0dip"
-                    android:layout_height="100dp"
-                    android:layout_margin="2dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/com_facebook_profile_picture_blank_square"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <soup.neumorphism.NeumorphCardView
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="fill_horizontal"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="-7dp"
+                    app:neumorph_shapeType="pressed">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/img1"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_launcher_foreground"/>
+                </soup.neumorphism.NeumorphCardView>
 
-                <ImageView
-                    android:id="@+id/img3"
-                    android:layout_width="0dip"
-                    android:layout_height="100dp"
-                    android:layout_margin="2dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/com_facebook_profile_picture_blank_square"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </TableRow>
+                <soup.neumorphism.NeumorphCardView
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="fill_horizontal"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="-7dp"
+                    app:neumorph_shapeType="pressed">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/img2"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_launcher_foreground"/>
+                </soup.neumorphism.NeumorphCardView>
+
+                <soup.neumorphism.NeumorphCardView
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="fill_horizontal"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="-7dp"
+                    app:neumorph_shapeType="pressed">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/img3"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_launcher_foreground"/>
+                </soup.neumorphism.NeumorphCardView>
+
+            </GridLayout>
         </TableLayout>
 
         <soup.neumorphism.NeumorphCardView
