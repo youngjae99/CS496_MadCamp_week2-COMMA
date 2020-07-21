@@ -34,11 +34,12 @@
             android:id="@+id/txtText"
             android:text="Profile"
             android:textSize="15dp"
-            android:fontFamily="@font/montserrat_medium"
+            android:fontFamily="@font/montserrat_bold"
             android:textColor="#000"
             android:alpha="0.87"
             android:gravity="left"
             android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -98,7 +99,6 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_launcher_foreground"/>
                 </soup.neumorphism.NeumorphCardView>
-
             </GridLayout>
         </TableLayout>
 
@@ -140,7 +140,7 @@
         app:neumorph_backgroundColor="@color/color1"
         android:text="SEND"
         android:textColor="@color/white"
-        android:fontFamily="@font/gillsansb"
+        android:fontFamily="@font/montserrat_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

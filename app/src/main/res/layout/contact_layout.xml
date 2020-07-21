@@ -14,69 +14,78 @@
         android:layout_marginBottom="-2dp"
         >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/photo"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_launcher_foreground"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:layout_marginRight="15dp"/>
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="170dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:paddingBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_gravity="center_vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="match_parent"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/photo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_launcher_foreground"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="15dp"/>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="190dp"
                     android:layout_height="wrap_content"
-                    android:textColor="#000000"
-                    android:textSize="20dp"
-                    android:text="Name" />
+                    android:orientation="vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/msg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#70000000"
-                    android:textSize="15dp"
-                    android:text="010-0000-0000" />
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        android:text="Name" />
 
-                <TextView
-                    android:id="@+id/email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#70000000"
-                    android:textSize="15dp"
-                    android:text="email@email.com"/>
+                    <TextView
+                        android:id="@+id/msg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#70000000"
+                        android:textSize="15dp"
+                        android:text="010-0000-0000" />
 
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#70000000"
+                        android:textSize="15dp"
+                        android:text="email@email.com"/>
+
+                </LinearLayout>
             </LinearLayout>
+
             <ImageView
                 android:id="@+id/checkmark"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
                 android:src="@drawable/ic_correct"
                 android:tint="@color/color1"
                 android:visibility="invisible"/>
+        </RelativeLayout>
 
-        </LinearLayout>
+
     </soup.neumorphism.NeumorphCardView>
 
 
