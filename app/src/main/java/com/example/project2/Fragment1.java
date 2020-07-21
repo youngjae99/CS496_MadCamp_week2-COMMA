@@ -255,12 +255,22 @@ public class Fragment1 extends Fragment{
                 }
                 else{
                     // Send 버튼 눌렀을 때 서버로 저장하는 코드 작성 필요
+                    String email = p.getEmail();
+                    String msg = msgText.getText().toString();
 
+                    CompositeDisposable compositeDisposable = new CompositeDisposable();
+                    compositeDisposable.add(iMyService.SendMsg(email, user_email, msg)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<String>() {
+                                @Override
+                                public void accept(String response) throws Exception {
+                                    Log.e("Send", ""+response);
+                                    Toast.makeText(getContext(), "익명으로 "+ p.getName()+"님께 메세지가 전송되었습니다", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss(); // 팝업 종료
+                                }
+                            }));
 
-
-                    // ====================
-                    Toast.makeText(getContext(), "익명으로 "+ p.getName()+"님께 메세지가 전송되었습니다", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss(); // 팝업 종료
                 }
             }
         });

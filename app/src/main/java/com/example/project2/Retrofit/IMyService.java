@@ -72,5 +72,11 @@ public interface IMyService {
     @GET("Get_All_profile")
     Observable<String> Get_All_profile();
 
+    @POST("SendMsg")
+    @FormUrlEncoded
+    Observable<String> SendMsg(@Field("email") String email,
+                               @Field("user_email") String user_email,
+                               @Field("msg") String msg);
+
 
 }
