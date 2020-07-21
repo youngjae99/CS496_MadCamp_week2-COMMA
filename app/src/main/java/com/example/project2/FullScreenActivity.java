@@ -2,6 +2,7 @@ package com.example.project2;
 
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
@@ -32,27 +33,23 @@ public class FullScreenActivity extends AppCompatActivity {
     }
     private void getIncomingIntent(){
         Log.d("FULL", "getIncomingIntent: check");
-        String imageUrl = getIntent().getStringExtra("image_url");
-        setImage(imageUrl);
+        String bitmap = getIntent().getStringExtra("bitmap");
+        setImage(StringToBitmap(bitmap));
     }
-    private void setImage(String imageUrl){
-        Log.d("FULL","full screen image to " + imageUrl);
+    private void setImage(Bitmap bitmap){
         ImageView img = findViewById(R.id.fullScreenImageView);
         Log.d("FULL","img view success");
-
-        Glide.with(this)
-                //.load(imageUrls.get(i).getImageUrl()) // 웹 이미지 로드
-                .load(imageUrl) // imageUrl
-                .into(img);
+        img.setImageBitmap(bitmap);
     }
-
-    public static String BitmapToString(Bitmap bitmap) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Bitmap rbitmap = Bitmap.createScaledBitmap(bitmap, 100, 100, true);
-        rbitmap.compress(Bitmap.CompressFormat.PNG, 20, baos);
-        byte[] bytes = baos.toByteArray();
-        String temp = Base64.encodeToString(bytes, Base64.DEFAULT);
-        return temp;
+    public static Bitmap StringToBitmap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 
 }

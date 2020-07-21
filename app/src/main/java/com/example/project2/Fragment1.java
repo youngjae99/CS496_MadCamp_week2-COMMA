@@ -257,7 +257,7 @@ public class Fragment1 extends Fragment{
                     return;
                 }
                 else{
-                    // Send 버튼 눌렀을 때 서버로 저장하는 코드 작성 필요
+                    // Send 버튼 눌렀을 때 서버로 저장하는 코드
                     String email = p.getEmail();
                     String msg = msgText.getText().toString();
 
@@ -268,8 +268,13 @@ public class Fragment1 extends Fragment{
                             .subscribe(new Consumer<String>() {
                                 @Override
                                 public void accept(String response) throws Exception {
-                                    Log.e("Send", ""+response);
-                                    Toast.makeText(getContext(), "익명으로 "+ p.getName()+"님께 메세지가 전송되었습니다", Toast.LENGTH_SHORT).show();
+                                    Log.e("Send", "" + response);
+                                    if (response.equals("\"1\"")){
+                                        Toast.makeText(getContext(), "Comma 화이팅", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else {
+                                        Toast.makeText(getContext(), "익명으로 " + p.getName() + "님께 메세지가 전송되었습니다", Toast.LENGTH_SHORT).show();
+                                    }
                                     dialog.dismiss(); // 팝업 종료
                                 }
                             }));
@@ -283,8 +288,6 @@ public class Fragment1 extends Fragment{
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         //super.onActivityResult(requestCode, resultCode, data);
         Log.e("변화!!", "1->fragment1");
-        img2.setImageURI(data.getData());
-        img3.setImageURI(data.getData());
     }
 
     private void set_profile(String emaillookingfor) {

@@ -57,8 +57,7 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
     ImageView img2;
     ImageView img3;
 
-    public ArrayList<imgFormat> FriendPhotoList = new ArrayList<>();
-    static ArrayList<ImageUrl> imageUrlList = new ArrayList<>();
+    public ArrayList<Bitmap> PhotoList = new ArrayList<>();
 
 
     public Fragment2() {
@@ -214,9 +213,9 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
         //localPhotoList = mGalleryManager.getAllPhotoPathList();
         //dataAdapter = new ImageAdapter(getActivity().getApplicationContext(), imageUrlList, localPhotoList, this, this);
 
-        //친구 profile1 사진 받아오기
-        FriendPhotoList = new ArrayList<>();
-        dataAdapter = new ImageAdapter(getActivity().getApplicationContext(), imageUrlList, FriendPhotoList, this, this);
+        //전체 유저 profile1 사진 받아오기
+        PhotoList = new ArrayList<>();
+        dataAdapter = new ImageAdapter(getActivity().getApplicationContext(), PhotoList, this, this);
         recyclerView.setAdapter(dataAdapter);
 
         CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -228,13 +227,15 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
                     public void accept(String response) throws Exception {
                         JSONArray jsonArray = new JSONArray(response);
                         for (int i=0; i<jsonArray.length(); i++) {
+                            String email = jsonArray.getJSONObject(i).getString("email");
                             String profile = jsonArray.getJSONObject(i).getString("profile");
-                            Log.e("################", profile);
-                            //contactAdapter.getItems(new Person(name, email, phone_number, new Long(0)));
+                            if (profile.equals("") || user_email.equals(email)) continue;
+                            Bitmap bitmap = StringToBitmap(profile);
+                            dataAdapter.getItems(bitmap);
                         }
+                        dataAdapter.notifyDataSetChanged();
                     }
                 }));
-
         return v;
     }
 
@@ -321,7 +322,7 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
 
         float width = bitmap.getWidth();
         float height = bitmap.getHeight();
-        float resizing_size = 150;
+        float resizing_size = 180;
         if (width > resizing_size) {
             float mWidth = (float)(width / 100);
             float fScale = (float)(resizing_size / mWidth);
