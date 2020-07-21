@@ -322,7 +322,7 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
 
         float width = bitmap.getWidth();
         float height = bitmap.getHeight();
-        float resizing_size = 180;
+        float resizing_size = 150;
         if (width > resizing_size) {
             float mWidth = (float)(width / 100);
             float fScale = (float)(resizing_size / mWidth);
