@@ -131,6 +131,9 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
                 startActivityForResult(intent, PICK_FROM_ALBUM3);
             }
         });
+
+        set_profile();
+
         mGalleryManager = new GalleryManager(getActivity().getApplicationContext());
         localPhotoList = mGalleryManager.getAllPhotoPathList();
         dataAdapter = new ImageAdapter(getActivity().getApplicationContext(), imageUrlList, localPhotoList, this, this);
@@ -148,6 +151,33 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
         recyclerView.setAdapter(dataAdapter);
 */
         return v;
+    }
+
+    private void set_profile() {
+        Retrofit retrofitClient = RetrofitClient.getInstance();
+        IMyService iMyService = retrofitClient.create(IMyService.class);
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+        compositeDisposable.add(iMyService.Get_profile(user_email+"_profile")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String response) throws Exception {
+                        Log.e("profile", "successss");
+                        //response는 user_email_profile의 모든 정보
+                        JSONArray jsonArray = new JSONArray(response);
+                        String bitmap1 = null, bitmap2=null, bitmap3=null;
+                        for (int i=0; i<3; i++){
+                            String number = jsonArray.getJSONObject(i).getString("number");
+                            if (number.equals("1")) bitmap1=jsonArray.getJSONObject(i).getString("bitmap");
+                            if (number.equals("2")) bitmap2=jsonArray.getJSONObject(i).getString("bitmap");
+                            if (number.equals("3")) bitmap3=jsonArray.getJSONObject(i).getString("bitmap");
+                        }
+                        if (bitmap1 != null) img1.setImageBitmap(StringToBitmap(bitmap1));
+                        if (bitmap2 != null) img2.setImageBitmap(StringToBitmap(bitmap2));
+                        if (bitmap3 != null) img3.setImageBitmap(StringToBitmap(bitmap3));
+                    }
+                }));
     }
 
     @Override
