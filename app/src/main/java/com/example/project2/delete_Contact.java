@@ -107,8 +107,13 @@ public class delete_Contact extends AppCompatActivity {
                     @Override
                     public void accept(String response) throws Exception {
                         Log.e("contact 제거", ""+response);
-                        Toast.makeText(getApplicationContext(), response+"우와아앙2222", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                     }
                 }));
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_down,R.anim.slide_down);
     }
 }

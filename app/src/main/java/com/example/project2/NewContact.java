@@ -1,5 +1,6 @@
 package com.example.project2;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -44,7 +45,7 @@ public class NewContact extends AppCompatActivity {
         ContactAdapter contactAdapter = new ContactAdapter(this, R.layout.contact_layout, phone_address);
         lv.setAdapter(contactAdapter);
 
-        TextView signupButton = (TextView) findViewById(R.id.signupButton);
+        TextView signupButton = (TextView) findViewById(R.id.addContact);
         signupButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,8 +84,14 @@ public class NewContact extends AppCompatActivity {
                     @Override
                     public void accept(String response) throws Exception {
                         Log.e("contact 추가", ""+response);
-                        Toast.makeText(getApplicationContext(), response+"우와아앙11111", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                     }
                 }));
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_down,R.anim.slide_down);
     }
 }

@@ -39,8 +39,8 @@
             android:name=".FullScreenActivity"
             android:theme="@style/Transparent" />
         <activity android:name=".ChatroomActivity"/>
-        <activity android:name=".NewContact"/>
-        <activity android:name=".delete_Contact"/>
+        <activity android:name=".NewContact" android:theme="@style/Transparent"/>
+        <activity android:name=".delete_Contact" android:theme="@style/Transparent"/>
 
         <activity android:name=".PopupActivity" android:theme="@android:style/Theme.Dialog" />
     </application>

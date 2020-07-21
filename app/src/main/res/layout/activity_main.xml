@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/color4"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -20,7 +20,7 @@
             android:contentInsetLeft="0dp"
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
-            android:background="@color/white">
+            android:background="@color/color4">
             <!--
             <ImageView
                 android:layout_width="70dp"
@@ -36,15 +36,18 @@
                 android:layout_margin="0dp"
                 android:orientation="horizontal">
 
-                <ImageView
+                <soup.neumorphism.NeumorphFloatingActionButton
                     android:id="@+id/logout"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="15dp"
+                    style="@style/Widget.Neumorph.FloatingActionButton"
+                    app:neumorph_backgroundColor="@color/color4"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:scaleType="centerInside"
                     android:src="@drawable/ic_logout"
-                    android:tint="@color/color1"/>
+                    android:tint="@color/color1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:neumorph_shapeAppearance="@style/CustomShapeAppearance" />
 
                 <ImageView
                     android:id="@+id/splashLogo"
@@ -52,6 +55,7 @@
                     android:layout_height="40dp"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/comma_logo"
+                    android:layout_centerInParent="true"
                     android:tint="@color/color1" />
 
 
@@ -75,10 +79,8 @@
                     android:layout_centerInParent="true"
                     android:layout_marginRight="15dp"
                     android:src="@drawable/ic_person" />
-
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -100,7 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="bottom"
-            app:tabTextColor="@color/white">
+            app:tabTextColor="@color/color4">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"

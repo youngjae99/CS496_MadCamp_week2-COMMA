@@ -114,7 +114,7 @@ public class Fragment1 extends Fragment{
                 Intent newPostIntent = new Intent(v.getContext(), NewContact.class);
                 newPostIntent.putExtra("user_email", user_email);
                 startActivity(newPostIntent);
-
+                getActivity().overridePendingTransition(R.anim.slide_up, R.anim.slide_up);
             }
         });
 
@@ -125,7 +125,7 @@ public class Fragment1 extends Fragment{
                 Intent newPostIntent = new Intent(v.getContext(), delete_Contact.class);
                 newPostIntent.putExtra("user_email", user_email);
                 startActivity(newPostIntent);
-
+                getActivity().overridePendingTransition(R.anim.slide_up, R.anim.slide_up);
             }
         });
         ImageView imageView;

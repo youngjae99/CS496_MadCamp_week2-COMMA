@@ -103,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
 
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_login);
+        //setContentView(R.layout.neumorph);
 
         data=new ArrayList<String>();
         user_emailET=(EditText) findViewById(R.id.user_email);
@@ -139,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
                         .setTitle("REGISTRATION")
                         .setDescription("Please fill all fields")
                         .setCustomView(register_layout)
+                        .setHeaderColor(R.color.color2)
                         .setNegativeText("CANCEL")
                         .onNegative(new MaterialDialog.SingleButtonCallback() {
                             @Override
@@ -354,7 +356,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Welcome "+res_list2[0] +"!!", Toast.LENGTH_LONG).show();
                         }
                         else{
-                            Toast.makeText(LoginActivity.this, response+"우와아앙", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, response, Toast.LENGTH_LONG).show();
                         }
                     }
                 }));

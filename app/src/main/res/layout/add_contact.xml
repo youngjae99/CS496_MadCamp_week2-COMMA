@@ -6,8 +6,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".NewContact"
     android:orientation="vertical"
+    android:background="@android:color/transparent"
     android:gravity="center_horizontal">
+    <LinearLayout
+        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:background="@android:color/transparent"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:background="@drawable/rounded_corner"
+        android:backgroundTint="@color/color4">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +41,7 @@
         android:textSize="15dp"
         android:textColor="#000000"
         android:textStyle="bold"
-        android:text="add your local contact to cloud" />
+        android:text="add your friends to your cloud contact" />
 
     <ListView
         android:id="@+id/add_user_list"
@@ -40,6 +53,7 @@
         android:layout_gravity="center"
         android:choiceMode="multipleChoice"/>
 
+    <!--
     <TextView
         android:id="@+id/signupButton"
         android:layout_width="300dp"
@@ -50,5 +64,20 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="20dp"
-        android:gravity="center"/>
+        android:gravity="center"/> -->
+
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/addContact"
+        style="@style/Widget.Neumorph.Button"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        app:neumorph_backgroundColor="@color/color4"
+        android:text="Delete"
+        android:textColor="@color/color1"
+        android:fontFamily="@font/gillsansb"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
 </LinearLayout>
