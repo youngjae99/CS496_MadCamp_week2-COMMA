@@ -1,11 +1,14 @@
 package com.example.project2;
 
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.ImageView;
@@ -17,6 +20,7 @@ import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
 import com.bumptech.glide.request.target.SquaringDrawable;
 
 import java.io.ByteArrayOutputStream;
+import java.net.URI;
 
 public class FullScreenActivity extends AppCompatActivity {
     @Override
@@ -40,54 +44,6 @@ public class FullScreenActivity extends AppCompatActivity {
                 //.load(imageUrls.get(i).getImageUrl()) // 웹 이미지 로드
                 .load(imageUrl) // imageUrl
                 .into(img);
-
-        /*
-        Drawable d = img.getDrawable();
-        Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
-        Log.d("bitmapTest", BitmapToString(bitmap));
-
-         */
-
-        Bitmap bitmap = null;
-        Drawable drawable = img.getDrawable();
-        /*
-        if (drawable instanceof GlideBitmapDrawable) {
-            bitmap = ((GlideBitmapDrawable) drawable).getBitmap();
-        } else if (drawable instanceof TransitionDrawable) {
-            TransitionDrawable transitionDrawable = (TransitionDrawable) drawable;
-            int length = transitionDrawable.getNumberOfLayers();
-            for (int i = 0; i < length; ++i) {
-                Drawable child = transitionDrawable.getDrawable(i);
-                if (child instanceof GlideBitmapDrawable) {
-                    bitmap = ((GlideBitmapDrawable) child).getBitmap();
-                    break;
-                } else if (child instanceof SquaringDrawable
-                        && child.getCurrent() instanceof GlideBitmapDrawable) {
-                    bitmap = ((GlideBitmapDrawable) child.getCurrent()).getBitmap();
-                    break;
-                }
-            }
-        } else if (drawable instanceof SquaringDrawable) {
-            bitmap = ((GlideBitmapDrawable) drawable.getCurrent()).getBitmap();
-        }
-        */
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (img.getDrawable() == null){
-                    //Image doesn´t exist.
-                    Log.d("bitmap","null좋아해");
-                }else{
-                    Drawable d = img.getDrawable();
-                    Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
-                    Log.d("bitmapTest", BitmapToString(bitmap));
-                }
-            }
-        }, 500);
-
-        if(bitmap==null) Log.d("bitmap","null좋아해2");
-        Log.d("bitmapTest", BitmapToString(bitmap));
     }
 
     public static String BitmapToString(Bitmap bitmap) {

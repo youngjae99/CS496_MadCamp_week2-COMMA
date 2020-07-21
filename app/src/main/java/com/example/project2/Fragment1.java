@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,12 @@ import retrofit2.Retrofit;
 public class Fragment1 extends Fragment{
     private ListView lv;
     String user_email;
+    private static final int PICK_FROM_ALBUM = 1;
+    private static final int PICK_FROM_ALBUM2 = 2;
+
+    ImageView img1;
+    ImageView img2;
+    ImageView img3;
     ContactAdapter contactAdapter;
 
     static Retrofit retrofitClient;
@@ -192,19 +199,36 @@ public class Fragment1 extends Fragment{
 
         /*
         Glide.with(getContext())
+=======
+        img1 = mView.findViewById(R.id.profile1);
+        img2 = mView.findViewById(R.id.profile2);
+        img3 = mView.findViewById(R.id.profile3);
+
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+            Log.e("여긴가!!", "!!");
+            startActivityForResult(intent, PICK_FROM_ALBUM);
+
+            }
+        });
+
+        /*Glide.with(getContext())
+>>>>>>> 315a9a28b7bfe6a8466d8ce018e134e1407e8143
                 //.load(imageUrls.get(i).getImageUrl()) // 웹 이미지 로드
                 .load("qweqweqwe") // 이미지 로드
                 .error(R.drawable.noimage)
                 .override(500,500) //해상도 최적화
                 .thumbnail(0.3f) //섬네일 최적화. 지정한 %만큼 미리 이미지를 가져와 보여주기
                 .centerCrop() // 중앙 크롭
-                .into(img1);
-
-         */
+                .into(img1);*/
 
         mBuilder.setView(mView);
         final AlertDialog dialog = mBuilder.create();
         dialog.show();
+
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -224,5 +248,13 @@ public class Fragment1 extends Fragment{
                 }
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        //super.onActivityResult(requestCode, resultCode, data);
+        Log.e("변화!!", "1->fragment1");
+        img2.setImageURI(data.getData());
+        img3.setImageURI(data.getData());
     }
 }

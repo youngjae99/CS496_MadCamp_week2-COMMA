@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment2">
+    tools:context=".Fragment2"
+    android:tag="fragment2">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,24 +28,28 @@
             android:columnCount="3"
             android:horizontalSpacing="10dp"
             android:layout_marginBottom="15dp">
+
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="fill_horizontal"
                 android:layout_columnWeight="1"
-                android:id="@+id/profile1"/>
+                android:id="@+id/my_profile1"
+                android:src="@drawable/ic_launcher_foreground"/>
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="fill_horizontal"
                 android:layout_columnWeight="1"
-                android:id="@+id/profile2"/>
+                android:id="@+id/my_profile2"
+                android:src="@drawable/ic_launcher_foreground"/>
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="fill_horizontal"
                 android:layout_columnWeight="1"
-                android:id="@+id/profile3"/>
+                android:id="@+id/my_profile3"
+                android:src="@drawable/ic_launcher_foreground"/>
 
         </GridLayout>
     </LinearLayout>
