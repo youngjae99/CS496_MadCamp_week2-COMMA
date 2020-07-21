@@ -43,6 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
+        android:layout_marginLeft="20dp"
         android:text="Neumorphism"
         android:textColor="@color/color1"
         android:textSize="40sp"

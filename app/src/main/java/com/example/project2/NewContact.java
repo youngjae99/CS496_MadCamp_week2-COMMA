@@ -1,5 +1,6 @@
 package com.example.project2;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,6 +10,8 @@ import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.project2.Retrofit.IMyService;
 import com.example.project2.Retrofit.RetrofitClient;
 
+import org.json.JSONArray;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -31,6 +35,7 @@ import retrofit2.Retrofit;
 public class NewContact extends AppCompatActivity {
 
     private ListView lv;
+    private final static String FRAGMENT_TAG = "FRAGMENTB_TAG";
     String user_email;
 
     @Override
@@ -64,6 +69,7 @@ public class NewContact extends AppCompatActivity {
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
+            @SuppressLint("ResourceAsColor")
             public void onItemClick(AdapterView<?> parent, View view, int position, long rowID)
             {
                 Log.e("포지션", ""+position);

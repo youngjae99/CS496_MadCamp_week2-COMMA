@@ -6,21 +6,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/flat_card"
+        style="@style/Widget.Neumorph.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        app:layout_constraintEnd_toStartOf="@id/pressed_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/photo"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_launcher_foreground"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="15dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/photo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_launcher_foreground"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="15dp"/>
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -67,8 +76,10 @@
                     android:textSize="15dp"
                     android:text="email@email.com"/>
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </LinearLayout>
+        </LinearLayout>
+    </soup.neumorphism.NeumorphCardView>
+
 
 </LinearLayout>
