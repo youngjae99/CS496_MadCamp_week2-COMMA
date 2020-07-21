@@ -68,7 +68,7 @@ public class NewContact extends AppCompatActivity {
             {
                 Log.e("포지션", ""+position);
                 if (lv.isItemChecked(position)) view.setBackgroundColor(Color.GRAY);
-                else view.setBackgroundColor(Color.WHITE);
+                else view.setBackgroundColor(R.color.color4);
             }});
     }
 
