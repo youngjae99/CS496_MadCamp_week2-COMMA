@@ -45,6 +45,7 @@ import retrofit2.Retrofit;
 public class Fragment1 extends Fragment{
     private ListView lv;
     String user_email;
+    String user_name;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int PICK_FROM_ALBUM2 = 2;
 
@@ -61,10 +62,11 @@ public class Fragment1 extends Fragment{
 
     }
 
-    public static Fragment1 newinstance(String email) {
+    public static Fragment1 newinstance(String email, String name) {
         Fragment1 fragment = new Fragment1();
         Bundle args = new Bundle();
         args.putString("email", email);
+        args.putString("name", name);
         fragment.setArguments(args);
         return fragment;
     }
@@ -74,6 +76,7 @@ public class Fragment1 extends Fragment{
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             user_email = getArguments().getString("email");
+            user_name = getArguments().getString("name");
         }
 
     }
@@ -259,7 +262,7 @@ public class Fragment1 extends Fragment{
                     String msg = msgText.getText().toString();
 
                     CompositeDisposable compositeDisposable = new CompositeDisposable();
-                    compositeDisposable.add(iMyService.SendMsg(email, user_email, msg)
+                    compositeDisposable.add(iMyService.SendMsg(email, user_name, user_email, msg)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new Consumer<String>() {

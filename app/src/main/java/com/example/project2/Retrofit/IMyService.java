@@ -75,6 +75,7 @@ public interface IMyService {
     @POST("SendMsg")
     @FormUrlEncoded
     Observable<String> SendMsg(@Field("email") String email,
+                               @Field("user_name") String user_name,
                                @Field("user_email") String user_email,
                                @Field("msg") String msg);
 

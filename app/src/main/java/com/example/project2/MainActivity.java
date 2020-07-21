@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return Fragment1.newinstance(user_email);
+                    return Fragment1.newinstance(user_email, user_name);
                 case 1:
                     return Fragment2.newinstance(user_email);
                 case 2:
