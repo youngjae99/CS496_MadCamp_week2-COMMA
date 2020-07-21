@@ -54,6 +54,8 @@
                     android:src="@drawable/comma_logo"
                     android:tint="@color/color1" />
 
+
+                <!--
                 <ImageView
                     android:id="@+id/profileImg"
                     android:layout_width="30dp"
@@ -62,7 +64,17 @@
                     android:layout_centerInParent="true"
                     android:layout_marginRight="15dp"
                     android:src="@drawable/ic_person"
-                    android:tint="@color/color1"/>
+                    android:tint="@color/color1"/> -->
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profileImg"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_person" />
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
