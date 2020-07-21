@@ -100,10 +100,13 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
         android:layout_weight="1"
         app:layout_anchorGravity="center"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+
+    <!--
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -123,23 +126,27 @@
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_menu1"
                 android:text=""/>
-            <!-- android:text="Contact" -->
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_menu2"
                 android:text=""/>
-            <!-- android:text="Gallery" -->
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_menu3"
                 android:text=""/>
-            <!-- android:text="Tab3" -->
-
         </com.google.android.material.tabs.TabLayout>
-    </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>-->
+
+    <com.iammert.library.AnimatedTabLayout
+        android:id="@+id/atl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        app:atl_tabs="@xml/tabs"/>
 
 </LinearLayout>

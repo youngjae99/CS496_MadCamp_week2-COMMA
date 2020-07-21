@@ -24,6 +24,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.material.tabs.TabLayout;
+import com.iammert.library.AnimatedTabLayout;
 
 import java.io.BufferedOutputStream;
 import java.util.ArrayList;
@@ -57,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        viewPager = findViewById(R.id.view_pager); //탭별 화면 보이는 view pager
-        tabLayout = findViewById(R.id.tab_layout); //탭바
 
         //txt_username = (TextView)findViewById(R.id.username);
         user_name = getIntent().getStringExtra("UserName");
@@ -103,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        viewPager = findViewById(R.id.view_pager); //탭별 화면 보이는 view pager
+        tabLayout = findViewById(R.id.tab_layout); //탭바
+
         fragment1 = new Fragment1();
         fragment2 = new Fragment2();
         fragment3 = new Fragment3();
@@ -117,9 +119,23 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu1);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_menu2);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_menu3);
-    }
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_menu3);*/
 
+        viewPager = findViewById(R.id.view_pager);
+        AnimatedTabLayout atl = findViewById(R.id.atl);
+
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
+        viewPagerAdapter.addFragment(fragment1, "");
+        viewPagerAdapter.addFragment(fragment2, "");
+        viewPagerAdapter.addFragment(fragment3, "");
+        viewPager.setAdapter(viewPagerAdapter);
+
+        atl.setTabChangeListener((AnimatedTabLayout.OnChangeListener)(new AnimatedTabLayout.OnChangeListener() {
+            public void onChanged(int position) {
+                Log.d("tab", String.format("tab changed to %d", position));
+            }
+        }));
+    }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
 

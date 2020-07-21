@@ -86,4 +86,7 @@ dependencies {
     implementation 'com.github.fornewid:neumorphism:0.1.11'
     //implementation 'com.github.thelumiereguy:NeumorphismView-Android:1.5'
 
+    //custum tab
+    implementation 'com.github.iammert:AnimatedTabLayout:0.1'
+
 }
