@@ -1,6 +1,7 @@
 package com.example.project2;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +36,7 @@ import java.util.Arrays;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -96,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
             loginIntent.putExtra("UserEmail", email);
             startActivity(loginIntent);
         }
+
 
         //Init Service
         Retrofit retrofitClient = RetrofitClient.getInstance();
@@ -376,6 +379,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e("변화!!!", "Login Activity!!!!");
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }

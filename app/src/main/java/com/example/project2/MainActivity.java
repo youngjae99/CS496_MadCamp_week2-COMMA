@@ -1,6 +1,7 @@
 package com.example.project2;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_menu3);
     }
 
+
     private class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private List<Fragment> fragments = new ArrayList<>();
@@ -120,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return Fragment1.newinstance(user_email);
                 case 1:
-                    return Fragment2.newinstance();
+                    return Fragment2.newinstance(user_email);
                 case 2:
                     return Fragment3.newinstance();
                 default:

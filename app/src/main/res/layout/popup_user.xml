@@ -51,21 +51,18 @@
             <ImageView
                 app:layout_constraintDimensionRatio="H,1:1"
                 android:layout_gravity="fill_horizontal"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:id="@+id/profile1"/>
+                android:id="@+id/profile1"
+                android:src="@drawable/ic_launcher_foreground"/>
             <ImageView
                 app:layout_constraintDimensionRatio="H,1:1"
                 android:layout_gravity="fill_horizontal"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:id="@+id/profile2"/>
+                android:id="@+id/profile2"
+                android:src="@drawable/ic_launcher_foreground"/>
             <ImageView
                 app:layout_constraintDimensionRatio="H,1:1"
                 android:layout_gravity="fill_horizontal"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:id="@+id/profile3"/>
+                android:id="@+id/profile3"
+                android:src="@drawable/ic_launcher_foreground"/>
 
         </GridLayout>
 

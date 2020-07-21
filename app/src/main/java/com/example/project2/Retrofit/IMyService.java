@@ -53,4 +53,10 @@ public interface IMyService {
     @FormUrlEncoded
     Observable<String> DeleteContact(@Field("user_email") String user_email,
                                      @Field("email") String email);
+
+    @POST("Change_profile")
+    @FormUrlEncoded
+    Observable<String> Change_profile(@Field("email") String email,
+                                      @Field("number") String number,
+                                      @Field("bitmap") String bitmap);
 }
