@@ -4,6 +4,7 @@ package com.example.project2;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -112,7 +113,31 @@ public class Fragment1 extends Fragment{
         {
             public void onItemClick(AdapterView<?> parent, View view, int position, long rowID)
             {
-                doSelectFriend((Person)parent.getItemAtPosition(position));
+                String email = ((Person)parent.getItemAtPosition(position)).getEmail();
+                String phone_number = ((Person)parent.getItemAtPosition(position)).getNumber();
+                CompositeDisposable compositeDisposable = new CompositeDisposable();
+                compositeDisposable.add(iMyService.SendOrNot(email, user_email)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<String>() {
+                            @Override
+                            public void accept(String response) throws Exception {
+                                if (response.equals("\"CAN\"")){
+                                    doSelectFriend((Person)parent.getItemAtPosition(position));
+                                }
+                                else{
+                                    // 불가능!!!!!
+                                    Log.e("#######################", "불가능");
+                                    Uri smsUri = Uri.parse("tel:" + phone_number);
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, smsUri);
+                                    intent.putExtra("address", phone_number);
+                                    intent.putExtra("sms_body", "COMMA 앱 다운받으세요 당장!!!");
+                                    intent.setType("vnd.android-dir/mms-sms");
+                                    startActivity(intent);
+                                }
+                            }
+                        }));
+
             }});
 
         ImageButton newContact = (ImageButton) v.findViewById(R.id.newContact); // ========= 연락처 추가

@@ -97,7 +97,7 @@ public class delete_Contact extends AppCompatActivity {
                 }
                 else{
                     //view.setBackgroundColor(R.color.color4);
-                    findViewById(R.id.checkmark).setVisibility(view.INVISIBLE);
+                    view.findViewById(R.id.checkmark).setVisibility(view.INVISIBLE);
                 }
             }});
     }

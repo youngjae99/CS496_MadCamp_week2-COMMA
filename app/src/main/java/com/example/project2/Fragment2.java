@@ -42,18 +42,20 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
     ImageView imageView;
     RecyclerView recyclerView;
     GridLayoutManager gridLayoutManager;
-    private GalleryManager mGalleryManager;
     ImageAdapter dataAdapter;
     private static final int PICK_FROM_ALBUM1 = 1;
     private static final int PICK_FROM_ALBUM2 = 2;
     private static final int PICK_FROM_ALBUM3 = 3;
     String user_email;
 
+    Retrofit retrofitClient;
+    IMyService iMyService;
+
     ImageView img1;
     ImageView img2;
     ImageView img3;
 
-    public ArrayList<imgFormat> localPhotoList;
+    public ArrayList<imgFormat> FriendPhotoList = new ArrayList<>();
     static ArrayList<ImageUrl> imageUrlList = new ArrayList<>();
 
 
@@ -88,14 +90,13 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
         gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 3);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+        retrofitClient = RetrofitClient.getInstance();
+        iMyService = retrofitClient.create(IMyService.class);
+
         img1 = v.findViewById(R.id.my_profile1);
         img1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, 100);*/
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 Log.e("fragment2", "출발");
@@ -106,10 +107,6 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
         img2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, 100);*/
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 Log.e("fragment2", "출발");
@@ -121,10 +118,6 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
         img3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, 100);*/
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 Log.e("fragment2", "출발");
@@ -134,28 +127,35 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
 
         set_profile();
 
-        mGalleryManager = new GalleryManager(getActivity().getApplicationContext());
-        localPhotoList = mGalleryManager.getAllPhotoPathList();
-        dataAdapter = new ImageAdapter(getActivity().getApplicationContext(), imageUrlList, localPhotoList, this, this);
-        recyclerView.setAdapter(dataAdapter);
-/*
-        imageView = (ImageView) v.findViewById(R.id.imageView);
-        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView2);
-        gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 3);
-        recyclerView.setLayoutManager(gridLayoutManager);
+        //로컬 사진 받아오기
+        //localPhotoList = mGalleryManager.getAllPhotoPathList();
+        //dataAdapter = new ImageAdapter(getActivity().getApplicationContext(), imageUrlList, localPhotoList, this, this);
 
-        ArrayList imageUrlList = prepareData();
-        mGalleryManager = new GalleryManager(getActivity().getApplicationContext());
-        localPhotoList = mGalleryManager.getAllPhotoPathList();
-        ImageAdapter dataAdapter = new ImageAdapter(getActivity().getApplicationContext(), imageUrlList, localPhotoList, this, this);
+        //친구 profile1 사진 받아오기
+        FriendPhotoList = new ArrayList<>();
+        dataAdapter = new ImageAdapter(getActivity().getApplicationContext(), imageUrlList, FriendPhotoList, this, this);
         recyclerView.setAdapter(dataAdapter);
-*/
+
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+        compositeDisposable.add(iMyService.Get_All_profile()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String response) throws Exception {
+                        JSONArray jsonArray = new JSONArray(response);
+                        for (int i=0; i<jsonArray.length(); i++) {
+                            String profile = jsonArray.getJSONObject(i).getString("profile");
+                            Log.e("################", profile);
+                            //contactAdapter.getItems(new Person(name, email, phone_number, new Long(0)));
+                        }
+                    }
+                }));
+
         return v;
     }
 
     private void set_profile() {
-        Retrofit retrofitClient = RetrofitClient.getInstance();
-        IMyService iMyService = retrofitClient.create(IMyService.class);
         CompositeDisposable compositeDisposable = new CompositeDisposable();
         compositeDisposable.add(iMyService.Get_profile(user_email+"_profile")
                 .subscribeOn(Schedulers.io())
@@ -221,7 +221,7 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
         Retrofit retrofitClient = RetrofitClient.getInstance();
         IMyService iMyService = retrofitClient.create(IMyService.class);
         CompositeDisposable compositeDisposable = new CompositeDisposable();
-        compositeDisposable.add(iMyService.Change_profile(user_email+"_profile", ""+number, result)
+        compositeDisposable.add(iMyService.Change_profile(user_email, ""+number, result)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {

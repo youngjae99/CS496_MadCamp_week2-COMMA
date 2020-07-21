@@ -31,12 +31,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     private ArrayList<ImageUrl> imageUrls;
     private Context context;
     //private OnItemClickListener onItemClickListener;
-    private ArrayList<imgFormat> localPhotoList;
+    private ArrayList<imgFormat> PhotoList;
 
-    public ImageAdapter(Context context, ArrayList<ImageUrl> imageUrls, ArrayList<imgFormat> localPhotoList, OnListItemSelectedInterface listener, OnListItemLongSelectedInterface longListener) {
+    public ImageAdapter(Context context, ArrayList<ImageUrl> imageUrls, ArrayList<imgFormat> PhotoList, OnListItemSelectedInterface listener, OnListItemLongSelectedInterface longListener) {
         this.context = context;
         this.imageUrls = imageUrls;
-        this.localPhotoList = localPhotoList;
+        this.PhotoList = PhotoList;
         this.mListener = listener;
         this.mLongListener = longListener;
     }
@@ -52,10 +52,10 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         //Glide.with(context).load(imageUrls.get(i).getImageUrl()).centerCrop().into(viewHolder.img);
         //final imgFormat cur = mPhotoList.get(i).getImgPath();
-        Log.d("item_print", localPhotoList.get(i).getImgPath());
+        Log.d("item_print", PhotoList.get(i).getImgPath());
         Glide.with(context)
                 //.load(imageUrls.get(i).getImageUrl()) // 웹 이미지 로드
-                .load(localPhotoList.get(i).getImgPath()) // 이미지 로드
+                .load(PhotoList.get(i).getImgPath()) // 이미지 로드
                 //.load("/storage/emulated/0/Download/Domestic_Goose.jpg")
                 .override(500,500) //해상도 최적화
                 .thumbnail(0.3f) //섬네일 최적화. 지정한 %만큼 미리 이미지를 가져와 보여주기
@@ -66,7 +66,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         //return imageUrls.size();
-        return localPhotoList.size();
+        return PhotoList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -85,7 +85,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                     Log.d("Recyclerview", "position="+getAdapterPosition());
 
                     Intent fullScreenIntent=new Intent(context, FullScreenActivity.class);
-                    fullScreenIntent.putExtra("image_url", localPhotoList.get(position).getImgPath());
+                    fullScreenIntent.putExtra("image_url", PhotoList.get(position).getImgPath());
                     context.startActivity(fullScreenIntent);
                 }
             });
