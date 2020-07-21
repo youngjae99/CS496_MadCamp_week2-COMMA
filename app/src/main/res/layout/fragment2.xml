@@ -12,15 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
+        <soup.neumorphism.NeumorphTextView
+            android:id="@+id/textview"
+            style="@style/Widget.Neumorph.TextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Profile"
-            android:textSize="20dp"
-            android:layout_margin="10dp"
-            android:fontFamily="@font/modelicab"
-            android:textColor="@color/color1">
-        </TextView>
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="My Profile Photo"
+            android:textColor="@color/color1"
+            android:textSize="26dp"
+            android:textStyle="bold" />
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="120dp"
@@ -54,15 +56,17 @@
         </GridLayout>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
+    <soup.neumorphism.NeumorphTextView
+        android:id="@+id/textview2"
+        style="@style/Widget.Neumorph.TextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
         android:text="Friends"
-        android:textSize="20dp"
-        android:layout_margin="10dp"
-        android:fontFamily="@font/modelicab"
-        android:textColor="@color/color1">
-    </TextView>
+        android:textColor="@color/color1"
+        android:textSize="26dp"
+        android:textStyle="bold" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView2"
         android:layout_width="match_parent"

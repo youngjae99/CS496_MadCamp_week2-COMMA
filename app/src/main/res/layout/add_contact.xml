@@ -18,14 +18,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:padding="10dp"
         android:background="@drawable/rounded_corner"
         android:backgroundTint="@color/color4">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:textSize="25dp"
         android:textColor="@color/color1"
@@ -35,14 +34,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:textSize="15dp"
         android:textColor="#000000"
         android:textStyle="bold"
-        android:text="add your friends to your cloud contact" />
+        android:text="add your friends to your cloud" />
 
     <ListView
         android:id="@+id/add_user_list"
@@ -73,10 +72,10 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        app:neumorph_backgroundColor="@color/color1_2"
+        app:neumorph_backgroundColor="@color/color1"
         android:text="ADD"
         android:textColor="@color/white"
-        android:fontFamily="@font/gillsansb"
+        android:fontFamily="@font/modelicab"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -16,12 +16,9 @@
 
     <color name="myTextColor">#AFAFAF</color>
 
-    <color name="color1">#000</color>
-    <color name="color1_2">#5360C8</color>
-    <color name="color1_1">#B9C0FD</color>
-    <color name="color2">#FCD7FF</color>
-    <color name="color3">#E3F1FF</color>
-    <color name="color4">#F0F0F3</color>
+    <color name="color1">#3B4664</color>
+    <color name="color4">#EDEDF1</color>
+    <color name="color5">#6D7587</color>
 
     <color name="transparent">#0C000000</color>
 

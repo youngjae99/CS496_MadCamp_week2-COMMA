@@ -153,6 +153,10 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         //super.onActivityResult(requestCode, resultCode, data);
+        if(data==null){
+            Log.e("Not","no image");
+            return ;
+        }
         Uri uri = data.getData();
         Drawable d;
         Bitmap bitmap;

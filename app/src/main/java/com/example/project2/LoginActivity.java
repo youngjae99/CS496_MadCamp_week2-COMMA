@@ -143,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
                         .setTitle("REGISTRATION")
                         .setDescription("Please fill all fields")
                         .setCustomView(register_layout)
-                        .setHeaderColor(R.color.color2)
+                        .setHeaderColor(R.color.color1)
                         .setNegativeText("CANCEL")
                         .onNegative(new MaterialDialog.SingleButtonCallback() {
                             @Override

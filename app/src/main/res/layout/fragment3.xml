@@ -6,88 +6,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="나를 좋아하는 사람들은"
-        android:layout_margin="20dp"
-        tools:ignore="MissingConstraints">
-    </TextView>
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/card_barrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="flat_card,pressed_card" />
-
-    <soup.neumorphism.NeumorphCardView
-        android:id="@+id/edittext_card"
-        style="@style/Widget.Neumorph.CardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:hint="Enter something"
-            android:singleLine="true" />
-
-    </soup.neumorphism.NeumorphCardView>
 
     <soup.neumorphism.NeumorphTextView
         android:id="@+id/textview"
         style="@style/Widget.Neumorph.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:text="Neumorphism"
+        android:text="Messages to me"
         android:textColor="@color/color1"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edittext_card" />
-
-    <soup.neumorphism.NeumorphCardView
-        android:id="@+id/flat_card"
-        style="@style/Widget.Neumorph.CardView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="48dp"
-        app:layout_constraintEnd_toStartOf="@id/pressed_card"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview" />
+        android:textSize="26dp"
+        android:textStyle="bold" />
 
     <soup.neumorphism.NeumorphCardView
         android:id="@+id/pressed_card"
         style="@style/Widget.Neumorph.CardView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/flat_card"
         app:layout_constraintTop_toBottomOf="@id/textview"
         app:neumorph_shapeType="pressed" />
-
 
     <soup.neumorphism.NeumorphButton
         style="@style/Widget.Neumorph.Button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:text="Button" />
-
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myList"

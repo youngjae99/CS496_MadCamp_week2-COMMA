@@ -19,15 +19,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:padding="10dp"
         android:background="@drawable/rounded_corner"
         android:backgroundTint="@color/color4">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:textSize="25dp"
         android:textColor="@color/color1"
@@ -37,8 +36,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:textSize="15dp"
@@ -75,10 +74,10 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        app:neumorph_backgroundColor="@color/color4"
+        app:neumorph_backgroundColor="@color/color1"
         android:text="Delete"
-        android:textColor="@color/color1"
-        android:fontFamily="@font/gillsansb"
+        android:textColor="@color/color4"
+        android:fontFamily="@font/modelicab"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
