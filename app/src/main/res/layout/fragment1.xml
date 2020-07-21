@@ -3,15 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/FRAGMENTB_TAG"
     android:orientation="vertical">
 
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center" />
-
-
+        android:layout_gravity="center"
+        android:dividerHeight="0px"
+        android:divider="#000000"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -44,7 +45,6 @@
             android:layout_height="50dp"
             android:layout_margin="5dp"
             android:elevation="10dp" />
-            -->
 
         <soup.neumorphism.NeumorphFloatingActionButton
             android:id="@+id/refresh"
@@ -57,7 +57,7 @@
             android:src="@drawable/ic_refresh"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:neumorph_shapeAppearance="@style/CustomShapeAppearance" />
+            app:neumorph_shapeAppearance="@style/CustomShapeAppearance" />-->
         <soup.neumorphism.NeumorphFloatingActionButton
             android:id="@+id/newContact"
             style="@style/Widget.Neumorph.FloatingActionButton"

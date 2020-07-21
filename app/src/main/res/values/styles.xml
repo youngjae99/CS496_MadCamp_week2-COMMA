@@ -66,4 +66,13 @@
         <item name="neumorph_cornerSize">32dp</item>
     </style>
 
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">#00000000</item>
+        <item name="colorControlActivated">#00000000</item>
+        <item name="android:textCursorDrawable">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="android:textColorHighlight">@color/lightgrey</item>
+    </style>
+
 </resources>

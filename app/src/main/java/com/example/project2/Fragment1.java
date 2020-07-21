@@ -38,11 +38,12 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
 public class Fragment1 extends Fragment{
-
-    private RecyclerView recyclerView;
     private ListView lv;
     String user_email;
+    ContactAdapter contactAdapter;
 
+    static Retrofit retrofitClient;
+    static IMyService iMyService;
 
     public Fragment1() {
         // Required empty public constructor
@@ -70,16 +71,16 @@ public class Fragment1 extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.d("Fragment1","onCreateView");
         final View v = inflater.inflate(R.layout.fragment1, container, false);
         ArrayList<Person> phone_address= new ArrayList<>();
-        ContactAdapter contactAdapter = new ContactAdapter(getContext(), R.layout.contact_layout, phone_address);
+        contactAdapter = new ContactAdapter(getContext(), R.layout.contact_layout, phone_address);
         lv = (ListView) v.findViewById(R.id.list);
         lv.setAdapter(contactAdapter);
 
-
         Log.i("여기", "입장");
-        Retrofit retrofitClient = RetrofitClient.getInstance();
-        IMyService iMyService = retrofitClient.create(IMyService.class);
+        retrofitClient = RetrofitClient.getInstance();
+        iMyService = retrofitClient.create(IMyService.class);
         CompositeDisposable compositeDisposable = new CompositeDisposable();
         compositeDisposable.add(iMyService.getContact(user_email)
                 .subscribeOn(Schedulers.io())
@@ -107,7 +108,7 @@ public class Fragment1 extends Fragment{
                 doSelectFriend((Person)parent.getItemAtPosition(position));
             }});
 
-        ImageButton newContact = (ImageButton) v.findViewById(R.id.newContact);
+        ImageButton newContact = (ImageButton) v.findViewById(R.id.newContact); // ========= 연락처 추가
         newContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,10 +116,11 @@ public class Fragment1 extends Fragment{
                 newPostIntent.putExtra("user_email", user_email);
                 startActivity(newPostIntent);
                 getActivity().overridePendingTransition(R.anim.slide_up, R.anim.slide_up);
+
             }
         });
 
-        ImageButton delete_Contact = (ImageButton) v.findViewById(R.id.delete_Contact);
+        ImageButton delete_Contact = (ImageButton) v.findViewById(R.id.delete_Contact); // ========= 연락처 제거
         delete_Contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,34 +130,41 @@ public class Fragment1 extends Fragment{
                 getActivity().overridePendingTransition(R.anim.slide_up, R.anim.slide_up);
             }
         });
-        ImageView imageView;
-        Drawable a;
-        ImageButton refresh = (ImageButton) v.findViewById(R.id.refresh);
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CompositeDisposable compositeDisposable = new CompositeDisposable();
-                compositeDisposable.add(iMyService.getContact(user_email)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<String>() {
-                            @Override
-                            public void accept(String response) throws Exception {
-                                contactAdapter.clear();
-                                JSONArray jsonArray = new JSONArray(response);
-                                for (int i=0; i<jsonArray.length(); i++) {
-                                    String name = jsonArray.getJSONObject(i).getString("name");
-                                    String email = jsonArray.getJSONObject(i).getString("email");
-                                    String phone_number = jsonArray.getJSONObject(i).getString("phone_number");
-                                    Log.i("유저 정보", name + " / " + email + " / " + phone_number);
-                                    contactAdapter.getItems(new Person(name, email, phone_number, new Long(0)));
-                                }
-                                contactAdapter.notifyDataSetChanged();
-                            }
-                        }));
-            }
-        });
+
         return v;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.e("DEBUG", "onResume of HomeFragment");
+        refreshList();
+    }
+
+    public void refreshList(){
+        Log.i("여기", "입장");
+        //Retrofit retrofitClient = RetrofitClient.getInstance();
+        //IMyService iMyService = retrofitClient.create(IMyService.class);
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+        compositeDisposable.add(iMyService.getContact(user_email)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String response) throws Exception {
+                        contactAdapter.clear();
+                        JSONArray jsonArray = new JSONArray(response);
+                        for (int i=0; i<jsonArray.length(); i++) {
+                            String name = jsonArray.getJSONObject(i).getString("name");
+                            String email = jsonArray.getJSONObject(i).getString("email");
+                            String phone_number = jsonArray.getJSONObject(i).getString("phone_number");
+                            Log.i("유저 정보", name + " / " + email + " / " + phone_number);
+                            contactAdapter.getItems(new Person(name, email, phone_number, new Long(0)));
+                        }
+                        contactAdapter.notifyDataSetChanged();
+                    }
+                }));
+        Log.i("End", "Game");
     }
 
     public void doSelectFriend(Person p) {

@@ -112,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
         private List<Fragment> fragments = new ArrayList<>();
         private List<String> fragmentTitle = new ArrayList<>();
 
-
         @NonNull
         @Override
         public Fragment getItem(int position) {

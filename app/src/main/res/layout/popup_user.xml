@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/white"
+    android:background="@drawable/rounded_corner2"
+    android:backgroundTint="@color/color4"
     android:orientation="vertical"
     android:layout_width="300dp"
     android:layout_height="wrap_content">
@@ -18,7 +19,6 @@
             android:textColor="#000"
             android:fontFamily="@font/modelicab"
             android:gravity="center"
-            android:background="@drawable/rounded_corner"
             android:layout_width="match_parent"
             android:layout_height="53dp" />
     </LinearLayout>
@@ -69,11 +69,25 @@
 
         </GridLayout>
 
-        <EditText
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/pressed_card"
+            style="@style/Widget.Neumorph.CardView"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:hint="익명으로 보내고 싶은 메세지를 입력해주세요">
-        </EditText>
+            android:layout_height="150dp"
+            android:layout_marginTop="48dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/flat_card"
+            app:layout_constraintTop_toBottomOf="@id/textview"
+            app:neumorph_shapeType="pressed">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                app:theme="@style/EditTextStyle"
+                android:hint="익명으로 보내고 싶은 메세지를 입력해주세요">
+            </EditText>
+        </soup.neumorphism.NeumorphCardView>
 
     </LinearLayout>
     <!-- Notice -->
@@ -84,16 +98,21 @@
         android:layout_height="1dp" />
 
     <!-- close btn -->
-    <Button
+
+    <soup.neumorphism.NeumorphButton
         android:id="@+id/send"
-        android:text="Send"
-        android:textSize="15dp"
-        android:padding="16dp"
-        android:gravity="center"
-        android:background="@color/color1"
-        android:layout_width="match_parent"
+        style="@style/Widget.Neumorph.Button"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:onClick="mOnClose"/>
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center"
+        app:neumorph_backgroundColor="@color/color1"
+        android:text="SEND"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gillsansb"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</LinearLayout>
 
     <!--// close btn -->
-</LinearLayout>
