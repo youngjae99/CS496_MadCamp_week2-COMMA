@@ -318,12 +318,30 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
 
     public static String BitmapToString(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Bitmap rbitmap = Bitmap.createScaledBitmap(bitmap, 150, 150, true);
+
+        float width = bitmap.getWidth();
+        float height = bitmap.getHeight();
+        float resizing_size = 150;
+        if (width > resizing_size) {
+            float mWidth = (float)(width / 100);
+            float fScale = (float)(resizing_size / mWidth);
+            width *= (fScale / 100);
+            height *= (fScale / 100);
+
+        } else if (height > resizing_size) {
+            float mHeight = (float)(height / 100);
+            float fScale = (float)(resizing_size / mHeight);
+            width *= (fScale / 100);
+            height *= (fScale / 100);
+        }
+        Bitmap rbitmap = Bitmap.createScaledBitmap(bitmap, (int)width, (int)height, true);
+
         rbitmap.compress(Bitmap.CompressFormat.PNG, 20, baos);
         byte[] bytes = baos.toByteArray();
         String temp = Base64.encodeToString(bytes, Base64.DEFAULT);
         return temp;
     }
+
     public static Bitmap StringToBitmap(String encodedString) {
         try {
             byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
