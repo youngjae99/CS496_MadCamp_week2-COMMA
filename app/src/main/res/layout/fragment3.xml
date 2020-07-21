@@ -14,6 +14,13 @@
         tools:ignore="MissingConstraints">
     </TextView>
 
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/card_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="flat_card,pressed_card" />
+
     <soup.neumorphism.NeumorphCardView
         android:id="@+id/edittext_card"
         style="@style/Widget.Neumorph.CardView"

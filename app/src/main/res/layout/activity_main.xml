@@ -40,8 +40,9 @@
                     android:id="@+id/logout"
                     style="@style/Widget.Neumorph.FloatingActionButton"
                     app:neumorph_backgroundColor="@color/color4"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_margin="-10dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/ic_logout"
                     android:tint="@color/color1"
@@ -70,6 +71,18 @@
                     android:src="@drawable/ic_person"
                     android:tint="@color/color1"/> -->
 
+                <soup.neumorphism.NeumorphFloatingActionButton
+                    android:id="@+id/photoUpload"
+                    style="@style/Widget.Neumorph.FloatingActionButton"
+                    app:neumorph_backgroundColor="@color/color4"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_margin="-10dp"
+                    android:scaleType="centerInside"
+                    android:tint="@color/color1"
+                    android:layout_alignParentRight="true"
+                    app:neumorph_shapeAppearance="@style/CustomShapeAppearance">
+                </soup.neumorphism.NeumorphFloatingActionButton>
                 <de.hdodenhof.circleimageview.CircleImageView
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/profileImg"
@@ -79,6 +92,7 @@
                     android:layout_centerInParent="true"
                     android:layout_marginRight="15dp"
                     android:src="@drawable/ic_person" />
+
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>

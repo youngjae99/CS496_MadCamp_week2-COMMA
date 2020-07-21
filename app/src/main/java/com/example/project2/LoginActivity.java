@@ -286,7 +286,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                                 Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
                                                                                 loginIntent.putExtra("UserName", name+"(Facebook)");
                                                                                 loginIntent.putExtra("UserEmail", email);
-                                                                                //loginIntent.putExtra("UserPhoto", profileImg);
+                                                                                loginIntent.putExtra("profileImgURL", profileImg);
                                                                                 startActivity(loginIntent);
                                                                                 //finish();
                                                                             }
@@ -368,6 +368,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra("UserEmail", email);
         intent.putExtra("UserName", name);
+        intent.putExtra("profileImgURL", "local");
         startActivity(intent);  // main 화면으로 이동
 
         finish(); // login 화면은 종료..

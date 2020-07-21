@@ -68,13 +68,25 @@ public class MainActivity extends AppCompatActivity {
 
         //txt_username = (TextView)findViewById(R.id.username); // 사용자 이름 표시
         //txt_username.setText(getIntent().getStringExtra("UserName"));
-        Glide.with(this) // 사용자 프로필 이미지 표시
-                .load(getIntent().getStringExtra("profileImgURL")) // 웹 이미지 로드
-                //.load(localPhotoList.get(i).getImgPath()) // 이미지 로드
-                .override(500,500) //해상도 최적화
-                .thumbnail(0.3f) //섬네일 최적화. 지정한 %만큼 미리 이미지를 가져와 보여주기
-                .centerCrop() // 중앙 크롭
-                .into(profile);
+        if(getIntent().getStringExtra("profileImgURL").equals("local")){ // 이메일 이용 로그인 -> 페북 사진 X
+            Glide.with(this) // 사용자 프로필 이미지 표시
+                    .load(R.drawable.com_facebook_profile_picture_blank_square) // 웹 이미지 로드
+                    //.load(localPhotoList.get(i).getImgPath()) // 이미지 로드
+                    .override(500,500) //해상도 최적화
+                    .thumbnail(0.3f) //섬네일 최적화. 지정한 %만큼 미리 이미지를 가져와 보여주기
+                    .centerCrop() // 중앙 크롭
+                    .into(profile);
+        }
+        else{ //페북 로그인
+            Glide.with(this) // 사용자 프로필 이미지 표시
+                    .load(getIntent().getStringExtra("profileImgURL")) // 웹 이미지 로드
+                    //.load(localPhotoList.get(i).getImgPath()) // 이미지 로드
+                    .override(500,500) //해상도 최적화
+                    .thumbnail(0.3f) //섬네일 최적화. 지정한 %만큼 미리 이미지를 가져와 보여주기
+                    .centerCrop() // 중앙 크롭
+                    .into(profile);
+        }
+
 
         Log.e("createdmain","created "+user_name);
 

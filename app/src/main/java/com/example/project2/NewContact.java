@@ -73,8 +73,15 @@ public class NewContact extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long rowID)
             {
                 Log.e("포지션", ""+position);
-                if (lv.isItemChecked(position)) view.setBackgroundColor(Color.GRAY);
-                else view.setBackgroundColor(R.color.color4);
+                if (lv.isItemChecked(position)){
+                    //view.setBackgroundColor(Color.GRAY);
+                    view.findViewById(R.id.checkmark).setVisibility(view.VISIBLE);
+                    //view.setVisibility(view.INVISIBLE);
+                }
+                else{
+                    //view.setBackgroundColor(R.color.color4);
+                    findViewById(R.id.checkmark).setVisibility(view.INVISIBLE);
+                }
             }});
     }
 

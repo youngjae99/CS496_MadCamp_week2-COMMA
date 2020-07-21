@@ -41,19 +41,47 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <GridLayout
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="horizontal"
-            android:columnCount="3"
-            android:horizontalSpacing="10dp"
-            android:layout_marginBottom="15dp">
+            android:layout_height="wrap_content"
+            android:stretchColumns="1">
+            <TableRow>
+                <ImageView
+                    android:id="@+id/img1"
+                    android:layout_width="0dip"
+                    android:layout_height="100dp"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/com_facebook_profile_picture_blank_square"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/img2"
+                    android:layout_width="0dip"
+                    android:layout_height="100dp"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/com_facebook_profile_picture_blank_square"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/img3"
+                    android:layout_width="0dip"
+                    android:layout_height="100dp"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/com_facebook_profile_picture_blank_square"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </TableRow>
+        </TableLayout>
+<!--
             <ImageView
                 app:layout_constraintDimensionRatio="H,1:1"
                 android:layout_gravity="fill_horizontal"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
                 android:id="@+id/profile1"/>
+
             <ImageView
                 app:layout_constraintDimensionRatio="H,1:1"
                 android:layout_gravity="fill_horizontal"
@@ -65,22 +93,21 @@
                 android:layout_gravity="fill_horizontal"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:id="@+id/profile3"/>
-
-        </GridLayout>
+                android:id="@+id/profile3"/>-->
 
         <soup.neumorphism.NeumorphCardView
             android:id="@+id/pressed_card"
             style="@style/Widget.Neumorph.CardView"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="10dp"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/flat_card"
             app:layout_constraintTop_toBottomOf="@id/textview"
             app:neumorph_shapeType="pressed">
             <EditText
+                android:id="@+id/messageBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"

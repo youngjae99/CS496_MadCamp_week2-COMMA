@@ -33,7 +33,7 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="5dp"
@@ -77,6 +77,13 @@
                     android:text="email@email.com"/>
 
             </LinearLayout>
+            <ImageView
+                android:id="@+id/checkmark"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_correct"
+                android:visibility="invisible"/>
 
         </LinearLayout>
     </soup.neumorphism.NeumorphCardView>

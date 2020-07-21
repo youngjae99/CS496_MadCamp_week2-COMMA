@@ -179,15 +179,18 @@ public class Fragment1 extends Fragment{
         Button send = (Button) mView.findViewById(R.id.send);
         TextView txtText = (TextView)mView.findViewById(R.id.txtText);
         TextView user = (TextView)mView.findViewById(R.id.userTo);
+        EditText msgText = (EditText)mView.findViewById(R.id.messageBox);
         //txtText.setText("익명으로 전달됩니다");
         user.setText("To. "+p.getName());
 
         for(int i=1; i<=3; i++){
 
         }
-        ImageView img1 = mView.findViewById(R.id.profile1);
-        ImageView img2 = mView.findViewById(R.id.profile2);
-        ImageView img3 = mView.findViewById(R.id.profile3);
+        ImageView img1 = mView.findViewById(R.id.img1);
+        ImageView img2 = mView.findViewById(R.id.img2);
+        ImageView img3 = mView.findViewById(R.id.img3);
+
+        /*
         Glide.with(getContext())
                 //.load(imageUrls.get(i).getImageUrl()) // 웹 이미지 로드
                 .load("qweqweqwe") // 이미지 로드
@@ -197,6 +200,8 @@ public class Fragment1 extends Fragment{
                 .centerCrop() // 중앙 크롭
                 .into(img1);
 
+         */
+
         mBuilder.setView(mView);
         final AlertDialog dialog = mBuilder.create();
         dialog.show();
@@ -204,13 +209,19 @@ public class Fragment1 extends Fragment{
             @Override
             public void onClick(View view) {
                 Log.d("clicked","button");
-                // Send 버튼 눌렀을 때 서버로 저장하는 코드 작성 필요
+                if(msgText.getText().length()<3){ // 메세지 길이가 너무 짧거나 비어있으면
+                    Toast.makeText(getContext(), "메세지를 좀 더 길게 써주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else{
+                    // Send 버튼 눌렀을 때 서버로 저장하는 코드 작성 필요
 
 
 
-                // ====================
-                Toast.makeText(getContext(), "익명으로 "+ p.getName()+"님께 메세지가 전송되었습니다", Toast.LENGTH_SHORT).show();
-                dialog.dismiss(); // 팝업 종료
+                    // ====================
+                    Toast.makeText(getContext(), "익명으로 "+ p.getName()+"님께 메세지가 전송되었습니다", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss(); // 팝업 종료
+                }
             }
         });
     }
