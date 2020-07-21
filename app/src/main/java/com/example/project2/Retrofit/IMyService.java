@@ -59,4 +59,10 @@ public interface IMyService {
     Observable<String> Change_profile(@Field("email") String email,
                                       @Field("number") String number,
                                       @Field("bitmap") String bitmap);
+
+    @POST("Get_profile")
+    @FormUrlEncoded
+    Observable<String> Get_profile(@Field("email") String email);
+
+
 }
