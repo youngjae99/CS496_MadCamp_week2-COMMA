@@ -59,7 +59,6 @@
                     android:layout_centerInParent="true"
                     android:tint="@color/color1" />
 
-
                 <!--
                 <ImageView
                     android:id="@+id/profileImg"
@@ -106,7 +105,7 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
 
-    <!--
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -139,14 +138,15 @@
                 android:icon="@drawable/ic_menu3"
                 android:text=""/>
         </com.google.android.material.tabs.TabLayout>
-    </com.google.android.material.appbar.AppBarLayout>-->
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <com.iammert.library.AnimatedTabLayout
-        android:id="@+id/atl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerVertical="true"
-        app:atl_tabs="@xml/tabs"/>
+    <!--
+        <com.iammert.library.AnimatedTabLayout
+            android:id="@+id/atl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            app:atl_tabs="@xml/tabs"/>-->
 
 </LinearLayout>

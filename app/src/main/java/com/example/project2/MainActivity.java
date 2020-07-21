@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*
+
         viewPager = findViewById(R.id.view_pager); //탭별 화면 보이는 view pager
         tabLayout = findViewById(R.id.tab_layout); //탭바
 
@@ -119,8 +119,9 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu1);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_menu2);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_menu3);*/
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_menu3);
 
+        /*
         viewPager = findViewById(R.id.view_pager);
         AnimatedTabLayout atl = findViewById(R.id.atl);
 
@@ -135,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("tab", String.format("tab changed to %d", position));
             }
         }));
+        */
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
