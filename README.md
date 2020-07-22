@@ -31,7 +31,7 @@ On the single image show screen, with the github library, we can zoom in the ima
 
 > Message Box
 
-* Google Maps, Recycler view: With the android's calendar view, we can get them on the tab3. To add the schedules on the specific day, we used recycler view to show the schedules we added by clicking the button at the bottom. 
+* Recycler view: Show the messages from other peopel
 
 
 ### Server
