@@ -2,7 +2,7 @@
 
 
 <p align="center">
-<img src="https://i.ibb.co/XDVgH3P/logo-icon.png" alt="logo-icon" border="0">
+<img src="https://i.ibb.co/XDVgH3P/logo-icon.png" alt="logo-icon" border="0" width="100">
 </p>
 
 ## Tab Application : COMMA (COnnect Me and MAdcamp)
