@@ -5,7 +5,7 @@
 <img src="https://i.ibb.co/XDVgH3P/logo-icon.png" alt="logo-icon" border="0" width="100">
 </p>
 <p align="center">
-<img src="https://i.ibb.co/2FwzZ3F/comma-logo.png" alt="comma-logo" border="0" width="200">
+<img src="https://i.ibb.co/2FwzZ3F/comma-logo.png" alt="comma-logo" border="0" width="250">
 </p>
 
 
