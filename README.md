@@ -13,7 +13,7 @@ The SNS platform to connect Mad Camp participants. Users can send notes anonymou
 
 > Cloude Contact List
 
-* List View,  : The contact information of the restaurants uploaded to Firebase was fetched and displayed in the Recyclerview. Tabs are implemented using fragments and viewpagers. After creating three fragments, we added tabs and viewpagers to the main activity.
+* List View, circle image view,  : The contacts selected in the local contact list can be uploaded to the server's personal contact database. At this time, we cannot add contact information without email because we require email as essential information. These included contacts function on the server as people in the personal contact database as'friends'. An anonymous message can be sent in the case of a subscriber, and a subscription induction SMS can be sent in the case of a non-subscriber.
 
 ### TAB2
 
