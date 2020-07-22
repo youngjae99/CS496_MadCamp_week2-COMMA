@@ -3,8 +3,11 @@
 
 <p align="center">
 <img src="https://i.ibb.co/XDVgH3P/logo-icon.png" alt="logo-icon" border="0" width="100">
+</p>
+<p align="center">
 <img src="https://i.ibb.co/2FwzZ3F/comma-logo.png" alt="comma-logo" border="0">
 </p>
+
 
 ## Tab Application : COMMA (COnnect Me and MAdcamp)
 The SNS platform to connect Mad Camp participants. Users can send notes anonymously to other users if they have. Favoring each other releases the anonymity and reveals each other's names, giving them a chance to get close.
