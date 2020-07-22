@@ -270,7 +270,7 @@ public class Fragment1 extends Fragment{
                                 public void accept(String response) throws Exception {
                                     Log.e("Send", "" + response);
                                     if (response.equals("\"1\"")){
-                                        Toast.makeText(getContext(), "Comma 화이팅", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), "축하합니다! 두분이 서로 호감을 표현했습니다!", Toast.LENGTH_SHORT).show();
                                     }
                                     else {
                                         Toast.makeText(getContext(), "익명으로 " + p.getName() + "님께 메세지가 전송되었습니다", Toast.LENGTH_SHORT).show();

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project2.Retrofit.IMyService;
@@ -60,6 +61,7 @@ public class Fragment3 extends Fragment{
         ArrayList<MessageFormat> messagelist= new ArrayList<>();
         messageAdapter = new MessageAdapter(getActivity().getApplicationContext(), messagelist);
         recyclerView = (RecyclerView) v.findViewById(R.id.messageList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
         recyclerView.setAdapter(messageAdapter);
 
         Retrofit retrofitClient = RetrofitClient.getInstance();
@@ -79,13 +81,12 @@ public class Fragment3 extends Fragment{
 
                             Log.e("메세지 정보", name +" / "+msg +" / "+hide);
                             messageAdapter.getItems(new MessageFormat(name, msg, hide));
+                            Log.e("messageCNT", String.valueOf(messageAdapter.getItemCount()));
                         }
                         messageAdapter.notifyDataSetChanged();
                     }
                 }));
         Log.i("End", "Game");
-
-
 
         return v;
     }

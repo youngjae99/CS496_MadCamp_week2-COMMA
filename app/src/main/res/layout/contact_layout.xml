@@ -52,6 +52,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="#000000"
                         android:textSize="20dp"
+                        android:fontFamily="@font/montserrat_regular"
                         android:text="Name" />
 
                     <TextView
@@ -60,6 +61,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="#70000000"
                         android:textSize="15dp"
+                        android:fontFamily="@font/montserrat_regular"
                         android:text="010-0000-0000" />
 
                     <TextView
@@ -68,6 +70,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="#70000000"
                         android:textSize="15dp"
+                        android:fontFamily="@font/montserrat_regular"
                         android:text="email@email.com"/>
 
                 </LinearLayout>

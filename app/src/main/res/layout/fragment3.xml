@@ -23,28 +23,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
-        app:neumorph_shapeType="pressed" />
+        app:neumorph_shapeType="pressed" >
 
-    <soup.neumorphism.NeumorphButton
-        style="@style/Widget.Neumorph.Button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:text="Button" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messageList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_alignParentBottom="true"
+            android:scrollbars="vertical"
+            />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/messageList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_alignParentBottom="true"
-        android:scrollbars="vertical"
-        />
-
-    <Button
-        android:id="@+id/chatStartBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Start Chat"></Button>
+    </soup.neumorphism.NeumorphCardView>
 
 </LinearLayout>

@@ -116,7 +116,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 app:theme="@style/EditTextStyle"
-                android:hint="익명으로 보내고 싶은 메세지를 입력해주세요">
+                android:hint="익명으로 보내고 싶은 호감 메세지를 입력해주세요">
             </EditText>
         </soup.neumorphism.NeumorphCardView>
 

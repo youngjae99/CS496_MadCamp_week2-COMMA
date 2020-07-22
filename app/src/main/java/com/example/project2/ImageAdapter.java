@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -84,6 +85,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         public ViewHolder(View view) {
             super(view);
             img = view.findViewById(R.id.imageView);
+            GradientDrawable g = (GradientDrawable)context.getDrawable(R.drawable.rounded_corner3);
+            img.setBackground(g);
+            img.setClipToOutline(true);
             //view.setOnCreateContextMenuListener(this);
 
             view.setOnClickListener(new View.OnClickListener(){

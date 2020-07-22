@@ -39,6 +39,8 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
+import static com.example.project2.R.drawable.ic_baseline_add_24;
+
 public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelectedInterface, ImageAdapter.OnListItemLongSelectedInterface {
 
     ImageView imageView;
@@ -258,8 +260,11 @@ public class Fragment2 extends Fragment implements ImageAdapter.OnListItemSelect
                             if (number.equals("3")) bitmap3=jsonArray.getJSONObject(i).getString("bitmap");
                         }
                         if (bitmap1 != null) img1.setImageBitmap(StringToBitmap(bitmap1));
+                        else img1.setImageResource(ic_baseline_add_24);
                         if (bitmap2 != null) img2.setImageBitmap(StringToBitmap(bitmap2));
+                        else img2.setImageResource(ic_baseline_add_24);
                         if (bitmap3 != null) img3.setImageBitmap(StringToBitmap(bitmap3));
+                        else img3.setImageResource(ic_baseline_add_24);
                     }
                 }));
     }

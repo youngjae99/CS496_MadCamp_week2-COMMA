@@ -22,23 +22,32 @@
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".Splash"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation">
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
         <activity android:name=".MainActivity">
         </activity>
+
         <activity
             android:name=".FullScreenActivity"
             android:theme="@style/Transparent" />
+
         <activity android:name=".NewContact" android:theme="@style/Transparent"/>
+
         <activity android:name=".delete_Contact" android:theme="@style/Transparent"/>
 
         <activity android:name=".PopupActivity" android:theme="@android:style/Theme.Dialog" />

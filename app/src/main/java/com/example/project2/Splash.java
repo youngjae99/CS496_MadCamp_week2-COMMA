@@ -1,6 +1,7 @@
 package com.example.project2;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -24,18 +29,23 @@ import java.util.Map;
 
 public class Splash extends AppCompatActivity {
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
+    private static int SPLASH_TIME_OUT = 5000;
+    Animation iconAnimtaion, logoAnimation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
 
-        ProgressBar progressBar;
-        int c = getResources().getColor(R.color.colorPrimary);
+        iconAnimtaion = AnimationUtils.loadAnimation(this, R.anim.anim_icon);
 
-        progressBar = findViewById(R.id.my_progress_bar);
-        progressBar.setIndeterminate(true);
-        progressBar.getIndeterminateDrawable().setColorFilter(c, PorterDuff.Mode.MULTIPLY);
+        ImageView icon = findViewById(R.id.iconLogo);
+        //icon.setAnimation(iconAnimtaion);
 
+        ObjectAnimator animation = ObjectAnimator.ofFloat(icon, "rotationY", 0.f, 360f);
+        animation.setDuration(3000);
+        animation.setRepeatCount(ObjectAnimator.INFINITE);
+        animation.setInterpolator(new AccelerateDecelerateInterpolator());
+        animation.start();
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -51,7 +61,7 @@ public class Splash extends AppCompatActivity {
                 }
 
             }
-        }, 1000);
+        }, 1800);
     }
 
     public void LaunchApp()
@@ -86,6 +96,10 @@ public class Splash extends AppCompatActivity {
             permissionsNeeded.add("WRITE");
         if (!addPermission(permissionsList, Manifest.permission.CALL_PHONE))
             permissionsNeeded.add("READ");
+        if (!addPermission(permissionsList, Manifest.permission.READ_CONTACTS))
+            permissionsNeeded.add("READ");
+        if (!addPermission(permissionsList, Manifest.permission.READ_CONTACTS))
+            permissionsNeeded.add("WRITE");
 
         if (permissionsList.size() > 0) {
             if (permissionsNeeded.size() > 0) {
