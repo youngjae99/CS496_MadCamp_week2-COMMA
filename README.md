@@ -2,7 +2,7 @@
 
 
 <p align="center">
-<img height="200" src='https://github.com/youngjae99/CS496_MadCamp_week2/blob/master/app/src/main/res/drawable/comma_logo.xml'/>
+<img src="https://i.ibb.co/XDVgH3P/logo-icon.png" alt="logo-icon" border="0">
 </p>
 
 ## Tab Application : COMMA (COnnect Me and MAdcamp)
