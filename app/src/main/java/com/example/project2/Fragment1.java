@@ -209,6 +209,8 @@ public class Fragment1 extends Fragment{
                     public void accept(String response) throws Exception {
                         contactAdapter.clear();
                         JSONArray jsonArray = new JSONArray(response);
+                        if(jsonArray.length()==0) getView().findViewById(R.id.nothingIcon).setVisibility(getView().VISIBLE);
+                        else getView().findViewById(R.id.nothingIcon).setVisibility(getView().INVISIBLE);
                         for (int i=0; i<jsonArray.length(); i++) {
                             String name = jsonArray.getJSONObject(i).getString("name");
                             String email = jsonArray.getJSONObject(i).getString("email");
@@ -219,6 +221,7 @@ public class Fragment1 extends Fragment{
                         contactAdapter.notifyDataSetChanged();
                     }
                 }));
+
         Log.i("End", "Game");
     }
 
