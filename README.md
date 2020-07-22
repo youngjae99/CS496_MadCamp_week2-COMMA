@@ -9,7 +9,7 @@
 </p>
 
 
-## Tab Application : COMMA (COnnect Me and MAdcamp)
+## COMMA (COnnect Me and MAdcamp) (a.k.a 맫캠시그널)
 The SNS platform to connect Mad Camp participants. Users can send notes anonymously to other users if they have. Favoring each other releases the anonymity and reveals each other's names, giving them a chance to get close.
 
 
