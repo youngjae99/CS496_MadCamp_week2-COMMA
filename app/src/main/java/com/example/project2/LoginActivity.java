@@ -239,7 +239,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                                 Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
                                                 Log.d("GotoMain", "already registered fb "+name+" "+email+" "+profileImg);
-                                                loginIntent.putExtra("UserName", name+"(Facebook)");
+                                                loginIntent.putExtra("UserName", name);
                                                 loginIntent.putExtra("UserEmail", email);
                                                 loginIntent.putExtra("profileImgURL", profileImg);
                                                 //loginIntent.putExtra("UserPhoto", profileImg);
@@ -287,7 +287,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                                 Log.d("GotoMain", "new register and login fb "+ name + email);
                                                                                 Toast.makeText(LoginActivity.this, ""+response, Toast.LENGTH_SHORT).show();
                                                                                 Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
-                                                                                loginIntent.putExtra("UserName", name+"(Facebook)");
+                                                                                loginIntent.putExtra("UserName", name);
                                                                                 loginIntent.putExtra("UserEmail", email);
                                                                                 loginIntent.putExtra("profileImgURL", profileImg);
                                                                                 startActivity(loginIntent);
@@ -433,7 +433,7 @@ public class LoginActivity extends AppCompatActivity {
             Log.d("LoginActivity", "already login");
             Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
             Log.d("IntentLog", "string - "+name+email+profileImg);
-            loginIntent.putExtra("UserName", name+"(Facebook)");
+            loginIntent.putExtra("UserName", name);
             loginIntent.putExtra("UserEmail", email);
             startActivity(loginIntent);
         }
