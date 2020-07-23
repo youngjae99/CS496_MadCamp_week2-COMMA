@@ -31,18 +31,15 @@ On the single image show screen, with the github library, we can zoom in the ima
 
 > Message Box
 
-* Recycler view: Show the messages from other peopel
+* Recycler view: Show the messages from other people. By default, messages from other people are delivered anonymously. However, if you send a message to each other at the same time as your partner, you will see the message in real name.
 
 
 ### Server
 
 The server was built using node js and mongo db.
 
-> Nod
+> Node.js Server
 * Google Maps, Recycler view: Not a fake splash screen that takes a few seconds, it's actually a step of getting access to the application to run.
-
-> Log-in / Sign up Page
-* Google Maps, Recycler view: 
 
 > Upload Screen
 
